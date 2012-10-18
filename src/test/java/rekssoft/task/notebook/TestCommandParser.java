@@ -18,7 +18,7 @@ public class TestCommandParser {
 
     @Before
     public void createParcer() {
-        commandParser = new CommandParserImpl();
+        commandParser = Creator.createCommandParcer();
     }
 
     @Test

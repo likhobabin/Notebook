@@ -16,4 +16,8 @@ public class Creator {
     public static App createApp() {
         return new AppImpl();
     }
+    
+    public static CommandParser createCommandParcer() {
+        return new CommandParserImpl();
+    }
 }

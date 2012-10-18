@@ -71,7 +71,7 @@ class AppImpl implements App {
 
     private CommandParser getCommandParcer() {
         return (null == commandParser)
-                ? commandParser = new CommandParserImpl()
+                ? commandParser = Creator.createCommandParcer()
                 : commandParser;
     }
     
