@@ -5,7 +5,7 @@ import java.io.Console;
 class AppImpl implements App {
 
     static void main(String[] args) {
-        new AppImpl().startDialog();
+        Creator.createApp().startDialog();
     }
 
     public void startDialog() {
