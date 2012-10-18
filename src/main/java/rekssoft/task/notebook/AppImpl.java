@@ -11,6 +11,7 @@ class AppImpl implements App {
     public void startDialog() {
         helpDialog();
         waitCommand();
+        close();
     }
 
     public void helpDialog() {
@@ -51,6 +52,10 @@ class AppImpl implements App {
             getCommandParcer().setCommand(command);
             showDialog();
         }
+    }
+    
+    public void close(){
+        
     }
 
     protected void showDialog() {

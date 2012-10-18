@@ -14,7 +14,5 @@ public interface ResourceFork extends Closable {
 
     public boolean isInitialized();
 
-    public EntityManager open() throws PersistenceException;
-
-    public void close();    
+    public EntityManager open() throws PersistenceException; 
 }

@@ -4,7 +4,7 @@ package rekssoft.task.notebook;
  *
  * @author ilya
  */
-public interface App {
+public interface App extends Closable {
 
     public void startDialog();
 
