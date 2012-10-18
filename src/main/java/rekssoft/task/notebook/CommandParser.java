@@ -4,7 +4,7 @@ package rekssoft.task.notebook;
  *
  * @author ilya
  */
-interface CommandParser {
+public interface CommandParser {
     public static final String HELP_COMMAND = "--help";    
     public static final String PRINT_COMMAND = "--print";  
     public static final String INSERT_COMMAND = "--insert";    

@@ -19,16 +19,16 @@ import javax.persistence.TransactionRequiredException;
 class UserDAOImpl implements UserDAO {
 
     public UserDAOImpl() {
-        userFork = SingleFork.FORK;
+        userResrcFork = SingleResourceFork.RESRC_FORK;
     }
 
     public void initialize(String aUserForkName) {
-        userFork.setName(aUserForkName);
-        userFork.initialize();
+        userResrcFork.setName(aUserForkName);
+        userResrcFork.initialize();
     }
 
     public boolean isInitialized() {
-        return userFork.isInitialized();
+        return userResrcFork.isInitialized();
     }
 
     public boolean insert(User anUser) throws IllegalArgumentException,
@@ -40,14 +40,14 @@ class UserDAOImpl implements UserDAO {
             return false;
         }
         try {
-            if (!getConnection().isOpen()) {
+            if (!getResrcForkConnection().isOpen()) {
                 System.err.println("Debug UserDAOImpl.insert "
                         + "the fork connection is closed");
                 return false;
             }
-            getConnection().getTransaction().begin();
-            getConnection().persist(anUser);
-            getConnection().getTransaction().commit();
+            getResrcForkConnection().getTransaction().begin();
+            getResrcForkConnection().persist(anUser);
+            getResrcForkConnection().getTransaction().commit();
         }
         catch (IllegalArgumentException ex) {
             ex.printStackTrace();
@@ -97,13 +97,13 @@ class UserDAOImpl implements UserDAO {
         List<User> result = null;
         boolean isThrowing = false;
         try {
-            if (!getConnection().isOpen()) {
+            if (!getResrcForkConnection().isOpen()) {
                 System.err.println("Debug UserDAOImpl.findAll "
                         + "the fork connection is closed");
 
                 return null;
             }
-            result = (List<User>) getConnection().createNamedQuery(User.FIND_ALL_QUERY)
+            result = (List<User>) getResrcForkConnection().createNamedQuery(User.FIND_ALL_QUERY)
                     .getResultList();
 
         }
@@ -148,23 +148,23 @@ class UserDAOImpl implements UserDAO {
         User rmUser = null;
         boolean isThrowing = false;
         try {
-            if (!getConnection().isOpen()) {
+            if (!getResrcForkConnection().isOpen()) {
                 System.err.println("Debug UserDAOImpl.removeByMail "
                         + "the fork connection is closed");
 
                 return false;
             }
-            rmUser = (User) getConnection().createNamedQuery(User.FIND_BY_MAIL_QUERY)
+            rmUser = (User) getResrcForkConnection().createNamedQuery(User.FIND_BY_MAIL_QUERY)
                     .setParameter("mail", aMailaddress)
                     .getSingleResult();
 
-            getConnection().getTransaction().begin();
+            getResrcForkConnection().getTransaction().begin();
             /*
              * The data is removed from the database
              * but the object is still accessible
              * */
-            getConnection().remove(rmUser);
-            getConnection().getTransaction().commit();
+            getResrcForkConnection().remove(rmUser);
+            getResrcForkConnection().getTransaction().commit();
         }
         catch (IllegalArgumentException ex) {
             ex.printStackTrace();
@@ -227,23 +227,23 @@ class UserDAOImpl implements UserDAO {
         User rmUser = null;
         boolean isThrowing = false;
         try {
-            if (!getConnection().isOpen()) {
+            if (!getResrcForkConnection().isOpen()) {
                 System.err.println("Debug UserDAOImpl.removeByMail "
                         + "the fork connection is closed");
 
                 return false;
             }
-            rmUser = (User) getConnection().createNamedQuery(User.FIND_BY_PHONENUMBER_QUERY)
+            rmUser = (User) getResrcForkConnection().createNamedQuery(User.FIND_BY_PHONENUMBER_QUERY)
                     .setParameter("phoneNumber", aPhonenumber)
                     .getSingleResult();
 
-            getConnection().getTransaction().begin();
+            getResrcForkConnection().getTransaction().begin();
             /*
              * The data is removed from the database
              * but the object is still accessible
              * */
-            getConnection().remove(rmUser);
-            getConnection().getTransaction().commit();
+            getResrcForkConnection().remove(rmUser);
+            getResrcForkConnection().getTransaction().commit();
         }
         catch (IllegalArgumentException ex) {
             ex.printStackTrace();
@@ -301,11 +301,11 @@ class UserDAOImpl implements UserDAO {
     }
 
     public void close() throws RuntimeException {
-        userFork.close();
+        userResrcFork.close();
     }
 
-    private EntityManager getConnection() {
-        return userFork.open();
+    private EntityManager getResrcForkConnection() {
+        return userResrcFork.open();
     }
-    private final Fork userFork;
+    private final ResourceFork userResrcFork;
 }

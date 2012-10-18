@@ -7,7 +7,7 @@ import javax.persistence.PersistenceException;
  *
  * @author ilya
  */
-public interface Fork extends Closable {
+public interface ResourceFork extends Closable {
     public void setName(String aPersistenceUnitName);
 
     public void initialize() throws PersistenceException ;

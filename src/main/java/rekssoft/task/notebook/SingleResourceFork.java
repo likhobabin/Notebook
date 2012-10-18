@@ -9,14 +9,14 @@ import javax.persistence.PersistenceException;
  *
  * @author ilya
  */
-enum SingleFork implements Fork {
+enum SingleResourceFork implements ResourceFork {
 
-    FORK;
+    RESRC_FORK;
 
-    SingleFork() {
+    SingleResourceFork() {
     }
 
-    SingleFork(String aPersistenceUnitName) {
+    SingleResourceFork(String aPersistenceUnitName) {
         persistenceUnitName = aPersistenceUnitName;
     }
 
