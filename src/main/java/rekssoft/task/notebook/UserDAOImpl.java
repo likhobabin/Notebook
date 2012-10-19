@@ -9,7 +9,7 @@ import javax.persistence.RollbackException;
  *
  * @author ilya
  */
-class UserDAOImpl implements UserDAO {
+public class UserDAOImpl implements UserDAO {
 
     public UserDAOImpl() {
         userResrcFork = SingleResourceFork.RESRC_FORK;
@@ -219,8 +219,9 @@ class UserDAOImpl implements UserDAO {
         userResrcFork.close();
     }
 
-    private EntityManager getResrcForkConnection() {
+    protected EntityManager getResrcForkConnection() {
         return userResrcFork.open();
     }
+    
     private final ResourceFork userResrcFork;
 }

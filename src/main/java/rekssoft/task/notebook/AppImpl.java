@@ -5,16 +5,22 @@ import java.util.List;
 import javax.persistence.PersistenceException;
 import static rekssoft.task.notebook.CommandParser.QUIT_COMMAND;
 
-class AppImpl implements App {
+public class AppImpl implements App {
 
     public static void main(String[] args) {
-        Creator.createApp().startDialog();
+        App app = null;
+        try {
+            app = Creator.createApp();
+            app.startDialog();
+        }
+        finally {
+            app.close();
+        }
     }
 
     public void startDialog() {
         helpDialog();
         waitCommand();
-        close();
     }
 
     public void helpDialog() {
@@ -43,7 +49,7 @@ class AppImpl implements App {
         printUsersTable(allUsers);
     }
 
-    private static void printUsersTable(List<User> anAllUsers) {        
+    protected static void printUsersTable(List<User> anAllUsers) {        
         if (0 != anAllUsers.size()) {
             final String[] tableHead = {
                 "Firstname",
@@ -240,20 +246,20 @@ class AppImpl implements App {
                 }
             }
             catch (PersistenceException ex) {
+                ex.printStackTrace();
                 System.err.println("Info: App.insertDialog"
                         + " Could not insert the input user,"
                         + " database error");
                 
                 getCommandParcer().setCommand(QUIT_COMMAND);
-//                ex.printStackTrace();
             }
             catch(RuntimeException ex) {
+                ex.printStackTrace();
                 System.err.println("Info: App.insertDialog"
                         + " Could not insert the input user,"
                         + "runtime error");  
                 
                 getCommandParcer().setCommand(QUIT_COMMAND);
-//                ex.printStackTrace();
             }
         }
     }
@@ -274,21 +280,21 @@ class AppImpl implements App {
                     
                 }
             }
-            catch (PersistenceException ex) {
+            catch (PersistenceException ex) { 
+                ex.printStackTrace();
                 System.err.println("Info: App.removeDialog"
                         + " Could not remove an user by the mail,"
                         + " database error");
                 
                 getCommandParcer().setCommand(QUIT_COMMAND);                
-//                ex.printStackTrace();
             }
             catch(RuntimeException ex) {
+                ex.printStackTrace();
                 System.err.println("Info: App.insertDialog"
                         + " Could not remove an user by the mail,"
                         + " runtime error");
                 
                 getCommandParcer().setCommand(QUIT_COMMAND);
-//                ex.printStackTrace();
             }            
         }
         
@@ -329,13 +335,13 @@ class AppImpl implements App {
         }
     }
 
-    private CommandParser getCommandParcer() {
+    protected CommandParser getCommandParcer() {
         return (null == commandParser)
                 ? commandParser = Creator.createCommandParcer()
                 : commandParser;
     }
     
-    private UserDAO getUserDAO() {        
+    protected UserDAO getUserDAO() {        
         if(null == userDAO) {
             userDAO = Creator.createUserDAO();
             userDAO.initialize("NotebookUsers");

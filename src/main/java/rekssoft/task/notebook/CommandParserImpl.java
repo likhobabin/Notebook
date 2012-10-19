@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
  *
  * @author ilya
  */
-class CommandParserImpl implements CommandParser {
+public class CommandParserImpl implements CommandParser {
 
     public void setCommand(String aCommandExpression)
             throws NullPointerException {
@@ -32,11 +32,8 @@ class CommandParserImpl implements CommandParser {
     }
 
     public User parseInserting() {
-        //to do: extract and pass an user from
         Pattern splitPattern = Pattern.compile("[ ]+");
-        String[] args = splitPattern.split(getCommandExpression());
-//        String[] args = getCommandExpression().split(" ");
-        
+        String[] args = splitPattern.split(getCommandExpression());        
         if (5 != args.length) {
             System.err.println("Debug CommandParserImpl.parseInserting Incorrect "
                     + "number of arguments");
@@ -82,7 +79,8 @@ class CommandParserImpl implements CommandParser {
     }
 
     public String parseRemoving() {
-        String[] args = getCommandExpression().split(" ");
+        Pattern splitPattern = Pattern.compile("[ ]+");
+        String[] args = splitPattern.split(getCommandExpression());
         if (2 != args.length) {
             System.err.println("Debug CommandParserImpl.parseRemoving Incorrect "
                     + "number of arguments");
@@ -103,11 +101,11 @@ class CommandParserImpl implements CommandParser {
         return commandExpression.equals(QUIT_COMMAND);
     }
 
-    String getCommandExpression() {
+    protected String getCommandExpression() {
         return commandExpression;
     }
 
-    Matcher getCommandMatcher() {
+    protected Matcher getCommandMatcher() {
         return commandMatcher;
     }
     

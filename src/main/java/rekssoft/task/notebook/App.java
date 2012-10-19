@@ -1,20 +1,48 @@
 package rekssoft.task.notebook;
 
 /**
- *
+ * interface <tt>App</tt> is a central application interface
+ * that represents a base of life-cycle of notebook application.
+ * <p><tt>App</tt> interface is implemented by a {@link AppImpl} class. 
+ * 
+ * @see AppImpl
  * @author ilya
  */
 public interface App extends Closable {
-
+    
+    /**
+     * Provides a base of the application life-cycle.
+     */
     public void startDialog();
 
+    /**
+     * Prints help information. 
+     */
     public void helpDialog();
 
+    /**
+     * Presents an user table.
+     */
     public void printDialog();
-
+    
+    /**
+     * Provides dialog with an {@link UserDAO} object 
+     * to insert new users.
+     * @see UserDAO 
+     */
     public void insertDialog();
-
+    
+    /**
+     * Provides dialog with an {@link UserDAO} object 
+     * to remove users.
+     * @see UserDAO 
+    */
     public void removeDialog();
-
+    
+    /**
+     * Controls the application life-cycle continuance
+     * and takes in client commands.
+     * @throws NullPointerException if the console can be done 
+     */
     public void waitCommand() throws NullPointerException;
 }
