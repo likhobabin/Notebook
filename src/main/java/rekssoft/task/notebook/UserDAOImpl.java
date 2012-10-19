@@ -1,16 +1,10 @@
 package rekssoft.task.notebook;
 
 import java.util.List;
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
-import javax.persistence.LockTimeoutException;
 import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceException;
-import javax.persistence.PessimisticLockException;
-import javax.persistence.QueryTimeoutException;
 import javax.persistence.RollbackException;
-import javax.persistence.TransactionRequiredException;
 /**
  *
  * @author ilya
@@ -58,17 +52,12 @@ class UserDAOImpl implements UserDAO {
             isThrowing = true;
             throw ex;
         }
-        catch (EntityExistsException ex) {
-            ex.printStackTrace();
-            isThrowing = true;
-            throw ex;
-        }
-        catch (TransactionRequiredException ex) {
-            ex.printStackTrace();
-            isThrowing = true;
-            throw ex;
-        }
         catch (RollbackException ex) {
+            ex.printStackTrace();
+            isThrowing = true;
+            throw ex;
+        }
+        catch (PersistenceException ex) {
             ex.printStackTrace();
             isThrowing = true;
             throw ex;
@@ -107,21 +96,6 @@ class UserDAOImpl implements UserDAO {
 
         }
         catch (IllegalArgumentException ex) {
-            ex.printStackTrace();
-            isThrowing = true;
-            throw ex;
-        }
-        catch (QueryTimeoutException ex) {
-            ex.printStackTrace();
-            isThrowing = true;
-            throw ex;
-        }
-        catch (PessimisticLockException ex) {
-            ex.printStackTrace();
-            isThrowing = true;
-            throw ex;
-        }
-        catch (LockTimeoutException ex) {
             ex.printStackTrace();
             isThrowing = true;
             throw ex;
@@ -166,41 +140,6 @@ class UserDAOImpl implements UserDAO {
             getResrcForkConnection().getTransaction().commit();
         }
         catch (IllegalArgumentException ex) {
-            ex.printStackTrace();
-            isThrowing = true;
-            throw ex;
-        }
-        catch (QueryTimeoutException ex) {
-            ex.printStackTrace();
-            isThrowing = true;
-            throw ex;
-        }
-        catch (PessimisticLockException ex) {
-            ex.printStackTrace();
-            isThrowing = true;
-            throw ex;
-        }
-        catch (LockTimeoutException ex) {
-            ex.printStackTrace();
-            isThrowing = true;
-            throw ex;
-        }
-        catch (EntityExistsException ex) {
-            ex.printStackTrace();
-            isThrowing = true;
-            throw ex;
-        }
-        catch (TransactionRequiredException ex) {
-            ex.printStackTrace();
-            isThrowing = true;
-            throw ex;
-        }
-        catch (RollbackException ex) {
-            ex.printStackTrace();
-            isThrowing = true;
-            throw ex;
-        }
-        catch (NonUniqueResultException ex) {
             ex.printStackTrace();
             isThrowing = true;
             throw ex;
@@ -250,41 +189,6 @@ class UserDAOImpl implements UserDAO {
             getResrcForkConnection().getTransaction().commit();
         }
         catch (IllegalArgumentException ex) {
-            ex.printStackTrace();
-            isThrowing = true;
-            throw ex;
-        }
-        catch (QueryTimeoutException ex) {
-            ex.printStackTrace();
-            isThrowing = true;
-            throw ex;
-        }
-        catch (PessimisticLockException ex) {
-            ex.printStackTrace();
-            isThrowing = true;
-            throw ex;
-        }
-        catch (LockTimeoutException ex) {
-            ex.printStackTrace();
-            isThrowing = true;
-            throw ex;
-        }
-        catch (EntityExistsException ex) {
-            ex.printStackTrace();
-            isThrowing = true;
-            throw ex;
-        }
-        catch (TransactionRequiredException ex) {
-            ex.printStackTrace();
-            isThrowing = true;
-            throw ex;
-        }
-        catch (RollbackException ex) {
-            ex.printStackTrace();
-            isThrowing = true;
-            throw ex;
-        }
-        catch (NonUniqueResultException ex) {
             ex.printStackTrace();
             isThrowing = true;
             throw ex;
