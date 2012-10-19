@@ -1,11 +1,11 @@
 package rekssoft.task.notebook;
 
+import java.util.List;
 import javax.persistence.RollbackException;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
-import java.util.List;
 /**
  *
  * @author ilya
@@ -116,6 +116,15 @@ public class TestUserDAO {
     }
     
     @Test
+    public void testFindAllInEmptyDataBase() {     
+        List<User> allUsers = null;
+        allUsers = userDAO.findAll();
+        assertEquals("Failed search of all users",
+                     (0 == allUsers.size()), true); 
+        
+    }
+    
+    @Test
     public void testRemoveByMail() {     
         final String rmMail = "venya.pupkin@gmail.com";
         createBulkOfUsers();
@@ -136,6 +145,15 @@ public class TestUserDAO {
     }
     
     @Test
+    public void testRemoveByMailFromEmptyDataBase() {     
+        final String rmMail = "venya.pupkin@gmail.com";        
+        assertEquals("Failed removing an user by the mail"
+                + " in the empty database",
+                userDAO.removeByMail(rmMail), false); 
+        
+    }
+    
+    @Test
     public void testRemoveByPhoneNumber() {     
         final String rmPhoneNumbet = "8(877)6669990";
         createBulkOfUsers();
@@ -153,6 +171,15 @@ public class TestUserDAO {
                 throw new IllegalStateException();
             }
         }        
+    }
+    
+    @Test
+    public void testRemoveByPhoneNumberFromEmptyDataBase() {     
+        final String rmPhoneNumbet = "8(877)6669990";        
+        assertEquals("Failed removing an user by the phone number"
+                + " in the empty database",
+                userDAO.removeByPhonenumber(rmPhoneNumbet), false); 
+                
     }
     
     private void createBulkOfUsers(){

@@ -11,6 +11,7 @@ import javax.persistence.PessimisticLockException;
 import javax.persistence.QueryTimeoutException;
 import javax.persistence.RollbackException;
 import javax.persistence.TransactionRequiredException;
+import javax.persistence.NoResultException;
 
 /**
  *
@@ -206,6 +207,11 @@ class UserDAOImpl implements UserDAO {
             isThrowing = true;
             throw ex;
         }
+        catch(NoResultException ex){
+            System.err.println("Debug UserDAOImpl.removeByMail "
+                        + "could not find an entity with the mail");
+            return false;
+        }
         catch (PersistenceException ex) {
             ex.printStackTrace();
             isThrowing = true;
@@ -218,7 +224,7 @@ class UserDAOImpl implements UserDAO {
                 close();
             }
         }
-        return true;
+        return null == rmUser ? false : true;
     }
 
     public boolean removeByPhonenumber(String aPhonenumber)
@@ -285,6 +291,11 @@ class UserDAOImpl implements UserDAO {
             isThrowing = true;
             throw ex;
         }
+        catch(NoResultException ex){
+            System.err.println("Debug UserDAOImpl.removeByPhonenumber "
+                        + "could not find an entity with the phone number");
+            return false;
+        }
         catch (PersistenceException ex) {
             ex.printStackTrace();
             isThrowing = true;
@@ -297,7 +308,7 @@ class UserDAOImpl implements UserDAO {
                 close();
             }
         }
-        return true;
+        return null == rmUser ? false : true;
     }
 
     public void close() throws RuntimeException {

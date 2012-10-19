@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="6.054" errors="0" skipped="0" tests="8" name="rekssoft.task.notebook.TestUserDAO">
+<testsuite failures="0" time="38.559" errors="0" skipped="0" tests="11" name="rekssoft.task.notebook.TestUserDAO">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386"/>
@@ -13,6 +13,7 @@
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value="unknown"/>
+    <property name="test" value="rekssoft.task.notebook.TestUserDAO"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="user.dir" value="/home/ilya/Workspace/Programming/Java/SE/Notebook"/>
     <property name="java.runtime.version" value="1.6.0_26-b03"/>
@@ -31,17 +32,20 @@
     <property name="java.class.version" value="50.0"/>
     <property name="sun.management.compiler" value="HotSpot Tiered Compilers"/>
     <property name="os.version" value="3.2.0-32-generic-pae"/>
+    <property name="jpda.listen" value="true"/>
+    <property name="jpda.address" value="52677"/>
     <property name="user.home" value="/home/ilya"/>
     <property name="user.timezone" value="Europe/Moscow"/>
     <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
-    <property name="file.encoding" value="UTF-8"/>
     <property name="java.specification.version" value="1.6"/>
+    <property name="file.encoding" value="UTF-8"/>
     <property name="user.name" value="ilya"/>
     <property name="java.class.path" value="/home/ilya/.netbeans/7.2/maven/boot/plexus-classworlds-2.4.jar"/>
+    <property name="maven.surefire.debug" value="-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=52677"/>
     <property name="java.vm.specification.version" value="1.0"/>
     <property name="sun.arch.data.model" value="32"/>
     <property name="java.home" value="/usr/lib/jvm/java-6-sun-1.6.0.26/jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher --update-snapshots --update-snapshots clean install"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dtest=rekssoft.task.notebook.TestUserDAO -DforkMode=once -Dmaven.surefire.debug=-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=52677 -Djpda.listen=true -Djpda.address=52677 --update-snapshots --update-snapshots test-compile surefire:test"/>
     <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
     <property name="user.language" value="en"/>
     <property name="java.vm.info" value="mixed mode"/>
@@ -53,17 +57,21 @@
     <property name="maven.home" value="/home/ilya/.netbeans/7.2/maven"/>
     <property name="file.separator" value="/"/>
     <property name="java.vendor.url.bug" value="http://java.sun.com/cgi-bin/bugreport.cgi"/>
+    <property name="forkMode" value="once"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="3.011" classname="rekssoft.task.notebook.TestUserDAO" name="testInitializtion"/>
-  <testcase time="0.643" classname="rekssoft.task.notebook.TestUserDAO" name="testInsertion"/>
-  <testcase time="0.412" classname="rekssoft.task.notebook.TestUserDAO" name="testUniqueMail"/>
-  <testcase time="0.345" classname="rekssoft.task.notebook.TestUserDAO" name="testUniquePhonenumber"/>
-  <testcase time="0.311" classname="rekssoft.task.notebook.TestUserDAO" name="testInsertOfUnsettingUser"/>
-  <testcase time="0.39" classname="rekssoft.task.notebook.TestUserDAO" name="testFindAllQuery"/>
-  <testcase time="0.444" classname="rekssoft.task.notebook.TestUserDAO" name="testRemoveByMail"/>
-  <testcase time="0.488" classname="rekssoft.task.notebook.TestUserDAO" name="testRemoveByPhoneNumber"/>
+  <testcase time="2.148" classname="rekssoft.task.notebook.TestUserDAO" name="testInitializtion"/>
+  <testcase time="0.515" classname="rekssoft.task.notebook.TestUserDAO" name="testInsertion"/>
+  <testcase time="0.378" classname="rekssoft.task.notebook.TestUserDAO" name="testUniqueMail"/>
+  <testcase time="0.314" classname="rekssoft.task.notebook.TestUserDAO" name="testUniquePhonenumber"/>
+  <testcase time="0.298" classname="rekssoft.task.notebook.TestUserDAO" name="testInsertOfUnsettingUser"/>
+  <testcase time="0.393" classname="rekssoft.task.notebook.TestUserDAO" name="testFindAllQuery"/>
+  <testcase time="0.364" classname="rekssoft.task.notebook.TestUserDAO" name="testFindAllInEmptyDataBase"/>
+  <testcase time="0.402" classname="rekssoft.task.notebook.TestUserDAO" name="testRemoveByMail"/>
+  <testcase time="16.146" classname="rekssoft.task.notebook.TestUserDAO" name="testRemoveByMailFromEmptyDataBase"/>
+  <testcase time="0.345" classname="rekssoft.task.notebook.TestUserDAO" name="testRemoveByPhoneNumber"/>
+  <testcase time="17.136" classname="rekssoft.task.notebook.TestUserDAO" name="testRemoveByPhoneNumberFromEmptyDataBase"/>
 </testsuite>
