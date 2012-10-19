@@ -63,6 +63,8 @@ public class TestUserDAO {
          * the predictable exception
          */
         catch (RollbackException ex) {
+            System.err.println("****Debug TestUserDAO.testUniqueMail"
+                    + " the predictable exception****");
         }        
     }
     

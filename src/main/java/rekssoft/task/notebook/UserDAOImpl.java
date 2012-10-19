@@ -1,18 +1,16 @@
 package rekssoft.task.notebook;
 
 import java.util.List;
-import javax.persistence.TypedQuery;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.LockTimeoutException;
+import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceException;
 import javax.persistence.PessimisticLockException;
 import javax.persistence.QueryTimeoutException;
 import javax.persistence.RollbackException;
 import javax.persistence.TransactionRequiredException;
-import javax.persistence.NoResultException;
-
 /**
  *
  * @author ilya

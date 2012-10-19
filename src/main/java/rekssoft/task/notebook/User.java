@@ -99,8 +99,8 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return firstname + " " + surname + " "
-                + mail + " " + phoneNumber;
+        return "| "+firstname + " | " + surname + " | "
+                + mail + " | " + phoneNumber + " |";
     }
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
