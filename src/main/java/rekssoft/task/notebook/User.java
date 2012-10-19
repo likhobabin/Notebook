@@ -37,13 +37,13 @@ import javax.persistence.Table;
         
 })
 public class User implements Serializable {
-    public static String FIND_ALL_QUERY = "User.findAll";
-    public static String FIND_BY_MAIL_QUERY = "User.findByMail";
-    public static String FIND_BY_PHONENUMBER_QUERY = 
+    public static final String FIND_ALL_QUERY = "User.findAll";
+    public static final String FIND_BY_MAIL_QUERY = "User.findByMail";
+    public static final String FIND_BY_PHONENUMBER_QUERY = 
             "User.findByPhonenumber";
     
-    public static String DELETE_BY_MAIL_QUERY = "User.deleteByMail";
-    public static String DELETE_BY_PHONENUMBER_QUERY = 
+    public static final String DELETE_BY_MAIL_QUERY = "User.deleteByMail";
+    public static final String DELETE_BY_PHONENUMBER_QUERY = 
             "User.deleteByPhonenumber";
     
     public User() {
