@@ -53,9 +53,11 @@ class UserDAOImpl implements UserDAO {
             throw ex;
         }
         catch (RollbackException ex) {
-            ex.printStackTrace();
-            isThrowing = true;
-            throw ex;
+            System.err.println("Debug UserDAOImpl.insert "
+                    + "Couldn't insert an (PhoneNumber or E-mail) clone "
+                    + "entity");
+            
+            return false;
         }
         catch (PersistenceException ex) {
             ex.printStackTrace();

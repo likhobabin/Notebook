@@ -105,7 +105,7 @@ public class TestCommandParser {
     //@Ignore
     @Test
     public void testInsertCommand() {
-        commandParser.setCommand("--insert Ivan Ivanov "
+        commandParser.setCommand("--insert    Ivan Ivanov "
                 + "ivan.ivanov@gmail.com 8(960)0000000");
         
         User insertUser = commandParser.parseInserting();

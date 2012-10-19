@@ -32,8 +32,11 @@ class CommandParserImpl implements CommandParser {
     }
 
     public User parseInserting() {
-        //to do: extract and pass an user from 
-        String[] args = getCommandExpression().split(" ");
+        //to do: extract and pass an user from
+        Pattern splitPattern = Pattern.compile("[ ]+");
+        String[] args = splitPattern.split(getCommandExpression());
+//        String[] args = getCommandExpression().split(" ");
+        
         if (5 != args.length) {
             System.err.println("Debug CommandParserImpl.parseInserting Incorrect "
                     + "number of arguments");
