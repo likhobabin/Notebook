@@ -51,7 +51,7 @@ class AppImpl implements App {
                 "E-mail",
                 "Phone-number"
             };
-            final int addnlAsteriskCount = 12;
+            final int addnlAsteriskCount = 13;
             final int maxFirstnameLength =
                     getMaxFirstnameLength(anAllUsers, tableHead[0].length());
 
