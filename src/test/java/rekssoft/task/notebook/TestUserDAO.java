@@ -1,12 +1,12 @@
 package rekssoft.task.notebook;
 
-import rekssoft.task.notebook.interfaces.UserDAO;
 import java.util.List;
 import javax.persistence.RollbackException;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
+import rekssoft.task.notebook.interfaces.UserDAO;
 /**
  *
  * @author ilya
@@ -57,14 +57,13 @@ public class TestUserDAO {
             User insertMailOrigUser = new User();
             insertMailOrigUser.setFirstname("Vova");
             insertMailOrigUser.setSurname("Puchkov");
-            insertMailOrigUser.setMail("vasya.pupkin@gmail.com");
+            insertMailOrigUser.setMail("vasya.puchkov@gmail.com");
             insertMailOrigUser.setPhoneNumber("8(777)6769990");
-            insertMailOrigUser.setFirstname("Tony");
 
             User insertMailCloneUser = new User();
             insertMailCloneUser.setFirstname("Vitya");
             insertMailCloneUser.setSurname("Puchkov");
-            insertMailCloneUser.setMail("vasya.pupkin@gmail.com");
+            insertMailCloneUser.setMail("vasya.puchkov@gmail.com");
             insertMailCloneUser.setPhoneNumber("8(797)6769990");
 
             assertEquals("Could not insert an user successfully", 
@@ -84,7 +83,7 @@ public class TestUserDAO {
         }
         finally {
             if (!isThrowing) {
-                userDAO.removeByMail("vasya.pupkin@gmail.com");
+                userDAO.removeByMail("vasya.puchkov@gmail.com");
             }
         }
     }
@@ -97,14 +96,14 @@ public class TestUserDAO {
             insertMailOrigUser.setFirstname("Vova");
             insertMailOrigUser.setSurname("Puchkov");
             insertMailOrigUser.setMail("vasya.pupkin@gmail.com");
-            insertMailOrigUser.setPhoneNumber("8(777)6769990");
+            insertMailOrigUser.setPhoneNumber("8(787)6769990");
             insertMailOrigUser.setFirstname("Tony");
 
             User insertMailCloneUser = new User();
             insertMailCloneUser.setFirstname("Vitya");
             insertMailCloneUser.setSurname("Puchkov");
             insertMailCloneUser.setMail("Vitya.Puchkov@gmail.com");
-            insertMailOrigUser.setPhoneNumber("8(777)6769990");
+            insertMailOrigUser.setPhoneNumber("8(787)6769990");
 
             assertEquals("Could not insert an user successfully", 
                          userDAO.insert(insertMailOrigUser), true);
@@ -128,7 +127,7 @@ public class TestUserDAO {
         }
         finally {
             if (!isThrowing) {
-                userDAO.removeByPhonenumber("8(777)6769990");
+                userDAO.removeByPhonenumber("8(787)6769990");
             }
         }      
     }
