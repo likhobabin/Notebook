@@ -1,10 +1,17 @@
 package rekssoft.task.notebook;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * Class <tt>CommandParserImpl</tt> presents a parser of input user commands of
+ * several types. This implements the {@link CommandParser} interface and
+ * provides the following capabilities: <p> - storing an input command
+ * expression; <p> - evaluating of a command type with use of
+ * <tt>isHelped</tt>, <tt>isPrinted</tt>, <tt>isInserted</tt> and
+ * <tt>isRemoved</tt> methods; <p> - extracting data with use of
+ * <tt>parseInserting</tt> and <tt>parseRemoving</tt>;
  *
+ * @see CommandParser
  * @author ilya
  */
 public class CommandParserImpl implements CommandParser {
@@ -30,7 +37,16 @@ public class CommandParserImpl implements CommandParser {
     public boolean isInserted() {
         return commandExpression.contains(INSERT_COMMAND);
     }
-
+    
+    /**
+     * Breaks the stored command expression up an arguments array. Arguments are
+     * used for extracting an {@link User} object. If the command expression is
+     * correct, it returns an <tt>User</tt> object otherwise it returns null.
+     *
+     * @see User
+     * @return an <tt>User</tt> object if the command expression is correct
+     * otherwise it returns null
+     */
     public User parseInserting() {
         Pattern splitPattern = Pattern.compile("[ ]+");
         String[] args = splitPattern.split(getCommandExpression());        
@@ -78,6 +94,14 @@ public class CommandParserImpl implements CommandParser {
         return commandExpression.contains(REMOVE_COMMAND);
     }
 
+    /**
+     * Breaks the stored command expression up an arguments array. Arguments are
+     * used for extracting an e-mail address. If the command expression is
+     * correct, it returns an e-mail address otherwise it returns null.
+     *
+     * @return an e-mail address if the command expression is correct
+     * otherwise it returns null
+     */
     public String parseRemoving() {
         Pattern splitPattern = Pattern.compile("[ ]+");
         String[] args = splitPattern.split(getCommandExpression());
@@ -104,11 +128,6 @@ public class CommandParserImpl implements CommandParser {
     protected String getCommandExpression() {
         return commandExpression;
     }
-
-    protected Matcher getCommandMatcher() {
-        return commandMatcher;
-    }
     
     private String commandExpression;
-    private Matcher commandMatcher;
 }

@@ -29,17 +29,29 @@ public class TestUserDAO {
     }
     
     @Test
-    public void testInsertion(){
-        User insertUser = new User();
-        insertUser.setFirstname("Vasya");
-        insertUser.setSurname("Pupkin");
-        insertUser.setMail("vasya.pupkin@gmail.com");
-        insertUser.setPhoneNumber("8(777)6669990");
-        userDAO.insert(insertUser);
+    public void testInsertion() {
+        boolean isThrowing = false;
+        try {
+            User insertUser = new User();
+            insertUser.setFirstname("Vasya");
+            insertUser.setSurname("Pupkin");
+            insertUser.setMail("vasya.pupkin@gmail.com");
+            insertUser.setPhoneNumber("8(777)6669990");
+            userDAO.insert(insertUser);
+        }
+        catch (Exception ex) {
+            isThrowing = true;
+        }
+        finally {
+            if (!isThrowing) {
+                userDAO.removeByMail("vasya.pupkin@gmail.com");
+            }
+        }
     }
     
     @Test
     public void testUniqueMail() {
+        boolean isThrowing = false;
         try {
             User insertMailOrigUser = new User();
             insertMailOrigUser.setFirstname("Vova");
@@ -65,11 +77,20 @@ public class TestUserDAO {
         catch (RollbackException ex) {
             System.err.println("****Debug TestUserDAO.testUniqueMail"
                     + " the predictable exception****");
-        }        
+        }
+        catch (Exception ex) {
+            isThrowing = true;
+        }
+        finally {
+            if (!isThrowing) {
+                userDAO.removeByMail("vasya.pupkin@gmail.com");
+            }
+        }
     }
     
     @Test
     public void testUniquePhonenumber() {
+        boolean isThrowing = false;
         try {
             User insertMailOrigUser = new User();
             insertMailOrigUser.setFirstname("Vova");
@@ -94,8 +115,21 @@ public class TestUserDAO {
         /*
          * the predictable exception
          */
+        /*
+         * the predictable exception
+         */
         catch (RollbackException ex) {
-        }        
+            System.err.println("****Debug TestUserDAO.testUniqueMail"
+                    + " the predictable exception****");
+        }
+        catch (Exception ex) {
+            isThrowing = true;
+        }
+        finally {
+            if (!isThrowing) {
+                userDAO.removeByPhonenumber("8(777)6769990");
+            }
+        }      
     }
     
     @Test
@@ -114,16 +148,7 @@ public class TestUserDAO {
         allUsers = userDAO.findAll();
         assertEquals("Failed search of all users",
                      (null != allUsers), true); 
-        
-    }
-    
-    @Test
-    public void testFindAllInEmptyDataBase() {     
-        List<User> allUsers = null;
-        allUsers = userDAO.findAll();
-        assertEquals("Failed search of all users",
-                     (0 == allUsers.size()), true); 
-        
+        removeBulkOfUsersByMail();        
     }
     
     @Test
@@ -144,6 +169,10 @@ public class TestUserDAO {
                 throw new IllegalStateException();
             }
         }        
+        
+        userDAO.removeByMail("vitya.pupkin@gmail.com");        
+        userDAO.removeByMail("mitya.pupkin@gmail.com");
+        userDAO.removeByMail("slava.pupkin@gmail.com");
     }
     
     @Test
@@ -173,6 +202,9 @@ public class TestUserDAO {
                 throw new IllegalStateException();
             }
         }        
+        userDAO.removeByMail("venya.pupkin@gmail.com");        
+        userDAO.removeByMail("mitya.pupkin@gmail.com");
+        userDAO.removeByMail("slava.pupkin@gmail.com");
     }
     
     @Test
@@ -194,7 +226,7 @@ public class TestUserDAO {
         userDAO.insert(insertUser0);        
         
         User insertUser1 = new User();
-        insertUser1.setFirstname("Mitya");
+        insertUser1.setFirstname("Vitya");
         insertUser1.setSurname("Pupkin");
         insertUser1.setMail("vitya.pupkin@gmail.com");
         insertUser1.setPhoneNumber("8(877)6669990");
@@ -213,6 +245,13 @@ public class TestUserDAO {
         insertUser4.setMail("slava.pupkin@gmail.com");
         insertUser4.setPhoneNumber("8(888)6669990");
         userDAO.insert(insertUser4);
+    }
+    
+    private void removeBulkOfUsersByMail(){
+        userDAO.removeByMail("venya.pupkin@gmail.com");        
+        userDAO.removeByMail("vitya.pupkin@gmail.com");        
+        userDAO.removeByMail("mitya.pupkin@gmail.com");
+        userDAO.removeByMail("slava.pupkin@gmail.com");
     }
     
     private UserDAO userDAO = Creator.createUserDAO();

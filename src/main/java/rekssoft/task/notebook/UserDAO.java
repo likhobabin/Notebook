@@ -8,9 +8,10 @@ import javax.persistence.PersistenceException;
  * control over user entities. <p> These are the following operations: <p> -
  * insert an user; <p> - find all users storing in a database; <p> - remove an
  * user with use of his e-mail; <p> - remove an user with use of his phone
- * number; <p> Class {@link User} presents user entities.
- * <tt>UserDAO</tt> is implemented by {@link UserDAOImpl}.
- * <p> REMARK: DAO - Data Access Object.
+ * number; <p> Class {@link User} presents user entities. <tt>UserDAO</tt> is
+ * implemented by {@link UserDAOImpl}. <p> REMARK: DAO - Data Access Object. <p>
+ * To summarize, the <tt>UserDAO</tt> presents a contract of the business
+ * layout of the application.
  *
  * @see User
  * @see UserDAOImpl

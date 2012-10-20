@@ -5,24 +5,53 @@ import java.util.List;
 import javax.persistence.PersistenceException;
 import static rekssoft.task.notebook.CommandParser.QUIT_COMMAND;
 
+/**
+ * Class <tt>AppImpl</tt> implements the interface {@link App} and provides the
+ * life-cycle of the application. 
+ * <p> A typical application life-cycle is presentation of user information,  
+ * and waiting for user commands. To create an AppImpl instance you should use 
+ * a {@link Creator} class.
+ * 
+ * @see Creator
+ * @see App
+ * @author ilya
+ */
 public class AppImpl implements App {
 
+    /**
+     * Runs the application
+     * @param args 
+     */
     public static void main(String[] args) {
         App app = null;
         try {
+            /*
+             * creates with Creator class
+             */
             app = Creator.createApp();
+            /*
+             * presents a help information and waits for user commands
+             */
             app.startDialog();
         }
+        /*
+         * to be sure the App instance is closed
+         */
         finally {
             app.close();
         }
     }
 
     public void startDialog() {
+        /*
+         * presents help
+         */
         helpDialog();
         waitCommand();
     }
-
+    /**
+     * Help presentation
+     */
     public void helpDialog() {
         System.out.println("Usage: notebook <command> ");
         System.out.println("Commands: ");
@@ -31,26 +60,50 @@ public class AppImpl implements App {
                 + "--print [Show an users table]\n"
                 + "--remove <e-mail> [Remove an user by e-mail]\n"
                 + "--quit [Quit the program]\n"
-                + "[Remark:"
+                + "[ Remark:"
                 + "\nRegular expressions:"
-                + "\n<full-name> : ^[A-Z]([A-Za-z]){1,20}"
-                + "\n<e-mail> : \n\t^[0-9A-Za-z]+((\\.[0-9A-Za-z]+)*"
-            + "\n\t(_[0-9A-Za-z]+)*(-[0-9A-Za-z]+)*(\\+[0-9A-Za-z]+)*)*"
-            + "\n\t@" + "[0-9A-Za-z]+"
-            + "\n\t((\\.[0-9A-Za-z]+)*(_[0-9A-Za-z]+)*(-[0-9A-Za-z]+)*(\\+[0-9A-Za-z]+)*)*"
-            + "\n\t\\.([A-za-z0-9]{2,})$"
-                + "\n\tSo e-mails look like __iv++an...iv--anov@g__m++a--i?l.c are incorrect"
-                + "\n\t i.v+n-0_v.iv+an@ya.ru is correct"
-                + "\n<phone-number> ^[0-9]\\(([0-9]){3}\\)([0-9]){7} ]");   
+                + "\n<full-name> : /^[A-Z]([A-Za-z]){1,20} ^[A-Z]([A-Za-z]){1,20}/"
+                + "\n\t iVan eGorov "
+                + "\n\t Alkjhhkhkhkhkhkhkhkjhk kjhkhhkhkhkhkhkhkj (not more than 21 chars) "
+                + "are INCORRECT"
+                + "\n\t Ivan Pupckin is CORRECT"                
+                + "\n<e-mail> : "
+                + "\n\t__iv++an...iv--anov@g__m++a--i?l.c"
+                + "\n\t.ivanov@gmail.com "
+                + "\n\t_iv--a-n--o++v.@gmail.c"
+                    + "\n\tivan..ov@gmail.com or ivanov@gma..il.com are INCORRECT"
+                + "\n\ti.v+n-0_v.iv+an@ya.ru"
+                + "\n\tivan.ivanov@gmail.com is CORRECT"                
+                + "\n<phone-number> /^[0-9]\\(([0-9]){3}\\)([0-9]){7}/"
+                + "\n\t 8(950)1234567 is CORRECT"
+                + "\n\t 8789a12132434343 is INCORRECT ]");   
     }
+    /**
+     * Waits an user command and passes it to a CommandParser object. Ends up the
+     * application life-cycle.
+     * @throws NullPointerException if the console can be done 
+     */
+    public void waitCommand() throws NullPointerException {
+        Console console = System.console();
+        if (null == console) {
+            throw new NullPointerException();
+        }
+        String command = null;
 
+        System.out.println("Waiting for a command...");
+        while (!getCommandParcer().isQuit()) {
+            command = console.readLine("%s", "Input a command ");
+            getCommandParcer().setCommand(command);
+            showDialog();
+        }
+    }
+    
+    /**
+     * Presents a simple user table.
+     */
     public void printDialog() {
-        List<User> allUsers = getUserDAO().findAll();
-        printUsersTable(allUsers);
-    }
-
-    protected static void printUsersTable(List<User> anAllUsers) {        
-        if (0 != anAllUsers.size()) {
+        List<User> allUsers = getUserDAO().findAll();      
+        if (0 != allUsers.size()) {
             final String[] tableHead = {
                 "Firstname",
                 "Surname",
@@ -59,23 +112,23 @@ public class AppImpl implements App {
             };
             final int addnlAsteriskCount = 13;
             final int maxFirstnameLength =
-                    getMaxFirstnameLength(anAllUsers, tableHead[0].length());
+                    getMaxFirstnameLength(allUsers, tableHead[0].length());
 
             final int maxSurnameLength =
-                    getMaxSurnameLength(anAllUsers, tableHead[1].length());
+                    getMaxSurnameLength(allUsers, tableHead[1].length());
 
             final int maxMailLengh =
-                    getMaxMailLengh(anAllUsers, tableHead[2].length());
+                    getMaxMailLengh(allUsers, tableHead[2].length());
 
             final int maxPhonenumberLengh =
-                    getMaxPhonenumberLengh(anAllUsers, tableHead[3].length());
+                    getMaxPhonenumberLengh(allUsers, tableHead[3].length());
 
             final int asteriskCount = maxFirstnameLength + maxSurnameLength
                     + maxMailLengh + maxPhonenumberLengh + addnlAsteriskCount;
             
             printTableHead(tableHead, maxFirstnameLength, maxSurnameLength,
                            maxMailLengh, maxPhonenumberLengh, addnlAsteriskCount);
-            for (User currUser : anAllUsers) {
+            for (User currUser : allUsers) {
                 printUserRow(currUser, maxFirstnameLength, maxSurnameLength,
                              maxMailLengh, maxPhonenumberLengh);
             }
@@ -86,10 +139,15 @@ public class AppImpl implements App {
             System.out.println();
         }
         else {
-            System.out.println("Info:: The Users Database is empty");
+            System.out.println("Info: The Users Database is empty");
         }
     }
     
+    /*    
+     * All the following static methods (printTableHead, printUserRow, 
+     * getMaxFirstnameLength and so on ) are used to implement left alignment of
+     * an user table.
+     */
     private static void printTableHead(String[] aTableHead,
                                        int aMaxFirstnameLength,
                                        int aMaxSurnameLength,
@@ -229,7 +287,15 @@ public class AppImpl implements App {
         }
         return maxLength;
     }
-    
+    /**
+     * Receives the insert type commands and processes them with use of an 
+     * {@link UserDAO} instance. So it inserts an {@link User} object if the object 
+     * is not null and no unpredictable exceptions are raised. If an exception 
+     * is raised,the method passes the quit type command.
+     * 
+     * @see UserDAO
+     * @see User
+     */
     public void insertDialog() {
         User insertUser = getCommandParcer().parseInserting();
         if(null == insertUser){
@@ -264,8 +330,13 @@ public class AppImpl implements App {
         }
     }
 
-    /*
-     * Removal by e-mail 
+    /**
+     * Removes an user from the database with use of his e-mail. So it removes 
+     * an {@link User} object if the object is not null and no unpredictable 
+     * exceptions are raised. If an exception is raised,the method passes the 
+     * quit type command. 
+     *      
+     * @see User
      */
     public void removeDialog() {
         String rmMail = getCommandParcer().parseRemoving();
@@ -299,22 +370,12 @@ public class AppImpl implements App {
         }
         
     }
-
-    public void waitCommand() throws NullPointerException {
-        Console console = System.console();
-        if (null == console) {
-            throw new NullPointerException();
-        }
-        String command = null;
-
-        System.out.println("Waiting for a command...");
-        while (!getCommandParcer().isQuit()) {
-            command = console.readLine("%s", "Input a command ");
-            getCommandParcer().setCommand(command);
-            showDialog();
-        }
-    }
-    
+    /**
+     * The end of the application causes the completion of an {@link UserDAO} object. 
+     * The database connection is closed as a result of that. 
+     * 
+     * @see UserDAO
+     */
     public void close(){ 
         getUserDAO().close();
     }
@@ -340,7 +401,12 @@ public class AppImpl implements App {
                 ? commandParser = Creator.createCommandParcer()
                 : commandParser;
     }
-    
+    /**
+     * Creates and initializes an {@link UserDAO} object. The database connection
+     * is opened as a result of that. The 'NotebookUsers' is a persistence unit name
+     * and it is passed to the <tt>UserDAO</tt> object.
+     * @return <tt>UserDAO</tt> initialized UserDAO object
+     */
     protected UserDAO getUserDAO() {        
         if(null == userDAO) {
             userDAO = Creator.createUserDAO();

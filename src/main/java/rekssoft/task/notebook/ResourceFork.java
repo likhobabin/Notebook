@@ -4,11 +4,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 
 /**
- * Interface <tt>ResourceFork</tt> presents a contract that is used by
- * clients to initialize and to open a database connection with use of the
- * provider API (based on JPA 2.0). 
- * In that particular case a provider is Hibernate and a database is PostgreSQL.
- * <tt>ResourceFork</tt> is implemented by {@link SingleesourceFork}
+ * Interface <tt>ResourceFork</tt> presents a contract that is used by clients
+ * to initialize and to open a database connection with use of the provider API
+ * (based on JPA 2.0). In that particular case a provider is Hibernate and a
+ * database is PostgreSQL. <tt>ResourceFork</tt> is implemented by
+ * {@link SingleesourceFork} To sum up, <tt>ResourceFork</tt> is the contract of
+ * the resource layout of the application.
  *
  * @see SingleResourceFork
  * @author ilya

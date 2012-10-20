@@ -5,8 +5,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 import javax.persistence.RollbackException;
+
 /**
+ * Class <tt>UserDAOImpl</tt> implements a {@link UserDAO} interface and so it
+ * is a part of the business layout. It is the first-hand client of the resource
+ * layout {@link ResourceFork} interface and it provides a set of capabilities
+ * to find, to insert and to remove {@link User} objects.
  *
+ * @see UserDAO
+ * @see User
+ * @see ResourceFork
  * @author ilya
  */
 public class UserDAOImpl implements UserDAO {
@@ -15,6 +23,12 @@ public class UserDAOImpl implements UserDAO {
         userResrcFork = SingleResourceFork.RESRC_FORK;
     }
 
+    /**
+     * Initializes a {@link ResourceFork} instance
+     *
+     * @param aUserForkName is used to initialize a {@link ResourceFork}
+     * instance
+     */
     public void initialize(String aUserForkName) {
         userResrcFork.setName(aUserForkName);
         userResrcFork.initialize();
@@ -24,6 +38,21 @@ public class UserDAOImpl implements UserDAO {
         return userResrcFork.isInitialized();
     }
 
+    /**
+     * Inserts an {@link User} object into the opened database. Returns
+     * <tt>false</tt> if the object is not set, if the database connection is
+     * not opened. The database connection would be closed if any database
+     * exception was raised and the exception would be passed to the {@link App}
+     * object.
+     *
+     * @param anUser
+     * @return <tt>false</tt> if the object is not set, if the database
+     * connection is not opened otherwise it returns <tt>true</tt>
+     * @throws IllegalArgumentException is the consequence of some database
+     * errors
+     * @throws IllegalStateException is the consequence of some database errors
+     * @throws PersistenceException is the consequence of some database errors
+     */
     public boolean insert(User anUser) throws IllegalArgumentException,
                                               IllegalStateException,
                                               PersistenceException {
@@ -56,7 +85,7 @@ public class UserDAOImpl implements UserDAO {
             System.err.println("Debug UserDAOImpl.insert "
                     + "Couldn't insert an (PhoneNumber or E-mail) clone "
                     + "entity");
-            
+
             return false;
         }
         catch (PersistenceException ex) {
@@ -81,6 +110,18 @@ public class UserDAOImpl implements UserDAO {
                 && null != insertUser.getPhoneNumber();
     }
 
+    /**
+     * Finds all {@link User} objects into the opened database. Returns
+     * <tt>null</tt>, if the database connection is not opened. The database
+     * connection would be closed if any database exception was raised and then
+     * the exception will be passed to the {@link App} object.
+     *
+     * @return Returns <tt>null</tt>, if the database connection is not opened,
+     * otherwise it returns <tt>List<User></tt> object
+     * @throws IllegalArgumentException is the consequence of some database
+     * errors
+     * @throws PersistenceException is the consequence of some database errors
+     */
     public List<User> findAll() throws IllegalArgumentException,
                                        PersistenceException {
 
@@ -117,6 +158,19 @@ public class UserDAOImpl implements UserDAO {
         return result;
     }
 
+    /**
+     * Removes {@link User} object from the opened database with use of his
+     * e-mail. Returns <tt>false</tt>, if the database connection is not opened,
+     * or if a user is not found. The database connection would be closed if any
+     * database exception was raised and then the exception will be passed to
+     * the {@link App} object.
+     *
+     * @return Returns <tt>false</tt>, if the database connection is not opened,
+     * or if a user is not found, otherwise it returns <tt>true</tt>
+     * @throws IllegalArgumentException is the consequence of some database
+     * errors
+     * @throws PersistenceException is the consequence of some database errors
+     */
     public boolean removeByMail(String aMailaddress)
             throws IllegalArgumentException, PersistenceException {
 
@@ -146,9 +200,9 @@ public class UserDAOImpl implements UserDAO {
             isThrowing = true;
             throw ex;
         }
-        catch(NoResultException ex){
+        catch (NoResultException ex) {
             System.err.println("Debug UserDAOImpl.removeByMail "
-                        + "could not find an entity with the mail");
+                    + "could not find an entity with the mail");
             return false;
         }
         catch (PersistenceException ex) {
@@ -166,6 +220,19 @@ public class UserDAOImpl implements UserDAO {
         return null == rmUser ? false : true;
     }
 
+    /**
+     * Removes {@link User} object from the opened database with use of his
+     * phone-number. Returns <tt>false</tt>, if the database connection is not
+     * opened, or if a user is not found. The database connection would be
+     * closed if any database exception was raised and then the exception will
+     * be passed to the {@link App} object.
+     *
+     * @return Returns <tt>false</tt>, if the database connection is not opened,
+     * or if a user is not found, otherwise it returns <tt>true</tt>
+     * @throws IllegalArgumentException is the consequence of some database
+     * errors
+     * @throws PersistenceException is the consequence of some database errors
+     */
     public boolean removeByPhonenumber(String aPhonenumber)
             throws IllegalArgumentException, PersistenceException {
 
@@ -195,9 +262,9 @@ public class UserDAOImpl implements UserDAO {
             isThrowing = true;
             throw ex;
         }
-        catch(NoResultException ex){
+        catch (NoResultException ex) {
             System.err.println("Debug UserDAOImpl.removeByPhonenumber "
-                        + "could not find an entity with the phone number");
+                    + "could not find an entity with the phone number");
             return false;
         }
         catch (PersistenceException ex) {
@@ -219,9 +286,12 @@ public class UserDAOImpl implements UserDAO {
         userResrcFork.close();
     }
 
+    /**
+     * @return a {@link ResourceFork} object that is responsible for the
+     * resource layout
+     */
     protected EntityManager getResrcForkConnection() {
         return userResrcFork.open();
     }
-    
     private final ResourceFork userResrcFork;
 }

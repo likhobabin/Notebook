@@ -13,6 +13,15 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
+ * Class <tt>User</tt> implements a mapping of user entities to a relational
+ * database.
+ *
+ * <p>This maps user entities into a database table called notebook_users_t. All
+ * named queries are stored into the set of final static variables for
+ * simplification. <p> So user entity has the following attributes: <p> - an id
+ * attribute (primary key); <p> - a first name (not more than 21 characters);
+ * <p> - a surname (not more than 21 characters); <p> - an e-mail (an unique
+ * value); <p> - a phone number (an unique value).
  *
  * @author ilya
  */
@@ -21,31 +30,26 @@ import javax.persistence.Table;
 @Access(AccessType.FIELD)
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u "
-        + "ORDER BY u.firstname ASC"),
-        
+    + "ORDER BY u.firstname ASC"),
     @NamedQuery(name = "User.findByMail", query = "SELECT u FROM User u "
     + "WHERE u.mail = :mail"),
-    
     @NamedQuery(name = "User.findByPhonenumber", query = "SELECT u FROM User u "
     + "WHERE u.phoneNumber = :phoneNumber"),
-    
     @NamedQuery(name = "User.deleteByMail", query = "DELETE FROM User u "
     + "WHERE u.mail = :mail"),
-    
     @NamedQuery(name = "User.deleteByPhonenumber", query = "DELETE FROM User u "
     + "WHERE u.phoneNumber = :phoneNumber")
-        
 })
 public class User implements Serializable {
+
     public static final String FIND_ALL_QUERY = "User.findAll";
     public static final String FIND_BY_MAIL_QUERY = "User.findByMail";
-    public static final String FIND_BY_PHONENUMBER_QUERY = 
+    public static final String FIND_BY_PHONENUMBER_QUERY =
             "User.findByPhonenumber";
-    
     public static final String DELETE_BY_MAIL_QUERY = "User.deleteByMail";
-    public static final String DELETE_BY_PHONENUMBER_QUERY = 
+    public static final String DELETE_BY_PHONENUMBER_QUERY =
             "User.deleteByPhonenumber";
-    
+
     public User() {
     }
 
@@ -99,7 +103,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "| "+firstname + " | " + surname + " | "
+        return "| " + firstname + " | " + surname + " | "
                 + mail + " | " + phoneNumber + " |";
     }
     @Id
@@ -111,6 +115,6 @@ public class User implements Serializable {
     private String surname;
     @Column(nullable = false, unique = true)
     private String mail;
-    @Column(nullable = false, unique = true, length=13)
+    @Column(nullable = false, unique = true, length = 13)
     private String phoneNumber;
 }
