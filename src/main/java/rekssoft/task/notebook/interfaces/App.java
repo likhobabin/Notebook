@@ -1,4 +1,4 @@
-package rekssoft.task.notebook;
+package rekssoft.task.notebook.interfaces;
 
 /**
  * interface <tt>App</tt> is a central application interface

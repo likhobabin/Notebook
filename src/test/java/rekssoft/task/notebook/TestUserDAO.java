@@ -1,5 +1,6 @@
 package rekssoft.task.notebook;
 
+import rekssoft.task.notebook.interfaces.UserDAO;
 import java.util.List;
 import javax.persistence.RollbackException;
 import org.junit.After;

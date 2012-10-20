@@ -1,6 +1,7 @@
 package rekssoft.task.notebook;
 
 import java.util.regex.Pattern;
+import rekssoft.task.notebook.interfaces.CommandParser;
 
 /**
  * Class <tt>CommandParserImpl</tt> presents a parser of input user commands of

@@ -3,7 +3,10 @@ package rekssoft.task.notebook;
 import java.io.Console;
 import java.util.List;
 import javax.persistence.PersistenceException;
-import static rekssoft.task.notebook.CommandParser.QUIT_COMMAND;
+import rekssoft.task.notebook.interfaces.App;
+import rekssoft.task.notebook.interfaces.CommandParser;
+import static rekssoft.task.notebook.interfaces.CommandParser.QUIT_COMMAND;
+import rekssoft.task.notebook.interfaces.UserDAO;
 
 /**
  * Class <tt>AppImpl</tt> implements the interface {@link App} and provides the

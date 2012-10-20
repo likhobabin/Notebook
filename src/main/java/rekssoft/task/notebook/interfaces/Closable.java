@@ -1,4 +1,4 @@
-package rekssoft.task.notebook;
+package rekssoft.task.notebook.interfaces;
 /**
  * Interface Closable indicates that a class implementing him must be 
  * closed after use. 

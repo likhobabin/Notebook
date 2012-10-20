@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="3.619" errors="0" skipped="0" tests="11" name="rekssoft.task.notebook.TestUserDAO">
+<testsuite failures="0" time="5.181" errors="0" skipped="0" tests="10" name="rekssoft.task.notebook.TestUserDAO">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386"/>
@@ -14,7 +14,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value="unknown"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/home/ilya/Workspace/Programming/Java/SE/Notebook"/>
+    <property name="user.dir" value="/home/ilya/Workspace/Programming/Java/SE/Notebook/Notebook.netbeans"/>
     <property name="java.runtime.version" value="1.6.0_26-b03"/>
     <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/endorsed"/>
@@ -41,7 +41,7 @@
     <property name="java.vm.specification.version" value="1.0"/>
     <property name="sun.arch.data.model" value="32"/>
     <property name="java.home" value="/usr/lib/jvm/java-6-sun-1.6.0.26/jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher --update-snapshots --update-snapshots install"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher --update-snapshots --update-snapshots clean install"/>
     <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
     <property name="user.language" value="en"/>
     <property name="java.vm.info" value="mixed mode"/>
@@ -58,15 +58,14 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="1.511" classname="rekssoft.task.notebook.TestUserDAO" name="testInitializtion"/>
-  <testcase time="0.303" classname="rekssoft.task.notebook.TestUserDAO" name="testInsertion"/>
-  <testcase time="0.242" classname="rekssoft.task.notebook.TestUserDAO" name="testUniqueMail"/>
-  <testcase time="0.28" classname="rekssoft.task.notebook.TestUserDAO" name="testUniquePhonenumber"/>
-  <testcase time="0.134" classname="rekssoft.task.notebook.TestUserDAO" name="testInsertOfUnsettingUser"/>
-  <testcase time="0.243" classname="rekssoft.task.notebook.TestUserDAO" name="testFindAllQuery"/>
-  <testcase time="0.168" classname="rekssoft.task.notebook.TestUserDAO" name="testFindAllInEmptyDataBase"/>
-  <testcase time="0.242" classname="rekssoft.task.notebook.TestUserDAO" name="testRemoveByMail"/>
-  <testcase time="0.133" classname="rekssoft.task.notebook.TestUserDAO" name="testRemoveByMailFromEmptyDataBase"/>
-  <testcase time="0.244" classname="rekssoft.task.notebook.TestUserDAO" name="testRemoveByPhoneNumber"/>
-  <testcase time="0.116" classname="rekssoft.task.notebook.TestUserDAO" name="testRemoveByPhoneNumberFromEmptyDataBase"/>
+  <testcase time="2.676" classname="rekssoft.task.notebook.TestUserDAO" name="testInitializtion"/>
+  <testcase time="0.356" classname="rekssoft.task.notebook.TestUserDAO" name="testInsertion"/>
+  <testcase time="0.292" classname="rekssoft.task.notebook.TestUserDAO" name="testUniqueMail"/>
+  <testcase time="0.287" classname="rekssoft.task.notebook.TestUserDAO" name="testUniquePhonenumber"/>
+  <testcase time="0.217" classname="rekssoft.task.notebook.TestUserDAO" name="testInsertOfUnsettingUser"/>
+  <testcase time="0.326" classname="rekssoft.task.notebook.TestUserDAO" name="testFindAllQuery"/>
+  <testcase time="0.315" classname="rekssoft.task.notebook.TestUserDAO" name="testRemoveByMail"/>
+  <testcase time="0.281" classname="rekssoft.task.notebook.TestUserDAO" name="testRemoveByMailFromEmptyDataBase"/>
+  <testcase time="0.283" classname="rekssoft.task.notebook.TestUserDAO" name="testRemoveByPhoneNumber"/>
+  <testcase time="0.13" classname="rekssoft.task.notebook.TestUserDAO" name="testRemoveByPhoneNumberFromEmptyDataBase"/>
 </testsuite>

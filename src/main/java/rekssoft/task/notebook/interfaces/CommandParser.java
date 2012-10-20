@@ -1,4 +1,6 @@
-package rekssoft.task.notebook;
+package rekssoft.task.notebook.interfaces;
+
+import rekssoft.task.notebook.User;
 
 /**
  * Interface <tt>CommandParser</tt> allows to a client 

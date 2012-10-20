@@ -1,12 +1,13 @@
 package rekssoft.task.notebook;
 
+import rekssoft.task.notebook.interfaces.CommandParser;
 import java.util.regex.Pattern;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
-import static rekssoft.task.notebook.CommandParser.MAIL_PATTERN;
-import static rekssoft.task.notebook.CommandParser.NAME_PATTERN;
-import static rekssoft.task.notebook.CommandParser.PHONE_NUMBER_PATTERN;
+import static rekssoft.task.notebook.interfaces.CommandParser.MAIL_PATTERN;
+import static rekssoft.task.notebook.interfaces.CommandParser.NAME_PATTERN;
+import static rekssoft.task.notebook.interfaces.CommandParser.PHONE_NUMBER_PATTERN;
 //
 //import org.junit.Ignore;
 

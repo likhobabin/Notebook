@@ -100,12 +100,7 @@ public class User implements Serializable {
     public String getPhoneNumber() {
         return phoneNumber;
     }
-
-    @Override
-    public String toString() {
-        return "| " + firstname + " | " + surname + " | "
-                + mail + " | " + phoneNumber + " |";
-    }
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

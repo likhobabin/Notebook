@@ -5,6 +5,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 import javax.persistence.RollbackException;
+import rekssoft.task.notebook.interfaces.ResourceFork;
+import rekssoft.task.notebook.interfaces.UserDAO;
 
 /**
  * Class <tt>UserDAOImpl</tt> implements a {@link UserDAO} interface and so it
@@ -24,7 +26,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     /**
-     * Initializes a {@link ResourceFork} instance
+     * Initializes a {@link ResourceFork} instance.
      *
      * @param aUserForkName is used to initialize a {@link ResourceFork}
      * instance
