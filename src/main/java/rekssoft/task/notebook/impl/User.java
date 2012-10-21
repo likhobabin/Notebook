@@ -1,4 +1,4 @@
-package rekssoft.task.notebook;
+package rekssoft.task.notebook.impl;
 
 import java.io.Serializable;
 import javax.persistence.Access;
@@ -103,7 +103,6 @@ public class User implements Serializable {
     public String getPhoneNumber() {
         return phoneNumber;
     }
-    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

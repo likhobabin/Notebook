@@ -1,6 +1,6 @@
 package rekssoft.task.notebook.interfaces;
 
-import rekssoft.task.notebook.User;
+import rekssoft.task.notebook.impl.User;
 
 /**
  * Interface <tt>CommandParser</tt> allows to a client to parse input commands.
@@ -12,8 +12,8 @@ import rekssoft.task.notebook.User;
  * {@link CommandParserImpl}
  *
  * @see App
- * @see AppImpl
- * @see CommandParserImpl
+ * @see rekssoft.task.notebook.impl.AppImpl
+ * @see rekssoft.task.notebook.impl.CommandParserImpl
  *
  * @author ilya
  */
@@ -38,7 +38,6 @@ public interface CommandParser {
             + "@" + "[0-9A-Za-z]+"
             + "((\\.[0-9A-Za-z]+)*(_[0-9A-Za-z]+)*(-[0-9A-Za-z]+)*(\\+[0-9A-Za-z]+)*)*"
             + "\\.([A-za-z0-9]{2,})$";
-    
     public static final String PHONE_NUMBER_PATTERN =
             "^[0-9]\\(([0-9]){3}\\)([0-9]){7}";
 
@@ -69,12 +68,12 @@ public interface CommandParser {
      * @return <tt>true</tt> if the input command is the find by name type
      */
     public boolean isFoundByName();
-    
+
     /**
      * Returns a <tt>String</tt> object if the input command is the find by name
      * type and if it is correctness otherwise it returns <tt>null</tt>. The
-     * <tt>String</tt> object is an user first name that will be used to find its
-     * owners.
+     * <tt>String</tt> object is an user first name that will be used to find
+     * its owners.
      *
      * @return extracted an user first name
      */
@@ -92,7 +91,7 @@ public interface CommandParser {
      * and if it is correctness otherwise it returns {@code null}.
      *
      * @return extracted an User object
-     * @see User
+     * @see rekssoft.task.notebook.impl.User
      */
     public User parseInsertCommand();
 

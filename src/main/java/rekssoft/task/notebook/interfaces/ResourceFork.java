@@ -11,32 +11,36 @@ import javax.persistence.PersistenceException;
  * {@link SingleesourceFork} To sum up, <tt>ResourceFork</tt> is the contract of
  * the resource layout of the application.
  *
- * @see SingleResourceFork
+ * @see rekssoft.task.notebook.impl.SingleResourceFork
  * @author ilya
  */
 public interface ResourceFork extends Closable {
+
     /**
-     * Sets the name of a persistence unit. 
+     * Sets the name of a persistence unit.
+     *
      * @param aPersistenceUnitName the name of a persistence unit
      */
     public void setName(String aPersistenceUnitName);
 
     /**
      * Initializes the database connection.
+     *
      * @throws PersistenceException if something goes wrong
      */
-    public void initialize() throws PersistenceException ;
+    public void initialize() throws PersistenceException;
 
     /**
      * Returns <tt>true</tt> if the database connection is done.
+     *
      * @return <tt>true</tt> if the database connection is done.
      */
     public boolean isInitialized();
 
     /**
-     * @return <tt>EntityManager</tt> the object provides the control over 
-     * a database.
+     * @return <tt>EntityManager</tt> the object provides the control over a
+     * database.
      * @throws PersistenceException if some database errors occur
      */
-    public EntityManager open() throws PersistenceException; 
+    public EntityManager open() throws PersistenceException;
 }

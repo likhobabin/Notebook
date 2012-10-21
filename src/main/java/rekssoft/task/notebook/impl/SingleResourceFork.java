@@ -1,4 +1,4 @@
-package rekssoft.task.notebook;
+package rekssoft.task.notebook.impl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -17,8 +17,8 @@ import rekssoft.task.notebook.interfaces.ResourceFork;
  * {@link EntityManager} classes, they provide all need capabilities to interact
  * with a database and are the part of JPA API. All need settings is presented
  * in the <tt>META-INF/persistence.xml</tt>. A first-hand client of the
- * SingleResourceFork is the {@link UserDAOImpl} class. To summarize, the 
- * <tt>SingleResourceFork</tt> is the resource layout class. 
+ * SingleResourceFork is the {@link UserDAOImpl} class. To summarize, the
+ * <tt>SingleResourceFork</tt> is the resource layout class.
  *
  * @see EntityManagerFactory
  * @see EntityManager
@@ -65,7 +65,7 @@ public enum SingleResourceFork implements ResourceFork {
             throws PersistenceException {
         if (!isInitialized()) {
             emf =
-                 Persistence.createEntityManagerFactory(persistenceUnitName);
+                    Persistence.createEntityManagerFactory(persistenceUnitName);
         }
     }
 

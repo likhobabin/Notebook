@@ -1,4 +1,4 @@
-package rekssoft.task.notebook;
+package rekssoft.task.notebook.impl;
 
 import java.util.regex.Pattern;
 import rekssoft.task.notebook.interfaces.CommandParser;
@@ -44,8 +44,8 @@ public class CommandParserImpl implements CommandParser {
      * used for extracting an user first name. If the command expression is
      * correct, it returns an user first name otherwise it returns null.
      *
-     * @return an user first name if the command expression is correct
-     * otherwise it returns null
+     * @return an user first name if the command expression is correct otherwise
+     * it returns null
      */
     public String parseFindByNameCommand() {
         Pattern splitPattern = Pattern.compile("[ ]+");

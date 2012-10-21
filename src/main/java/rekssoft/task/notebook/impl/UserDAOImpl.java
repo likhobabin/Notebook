@@ -1,4 +1,4 @@
-package rekssoft.task.notebook;
+package rekssoft.task.notebook.impl;
 
 import java.util.List;
 import javax.persistence.EntityManager;

@@ -1,8 +1,8 @@
-package rekssoft.task.notebook;
+package rekssoft.task.notebook.interfaces;
 
-import rekssoft.task.notebook.interfaces.App;
-import rekssoft.task.notebook.interfaces.CommandParser;
-import rekssoft.task.notebook.interfaces.UserDAO;
+import rekssoft.task.notebook.impl.AppImpl;
+import rekssoft.task.notebook.impl.CommandParserImpl;
+import rekssoft.task.notebook.impl.UserDAOImpl;
 
 /**
  * Class <tt>Creator</tt> is used to create objects without knowledge about

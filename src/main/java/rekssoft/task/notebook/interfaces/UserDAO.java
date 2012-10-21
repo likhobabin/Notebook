@@ -2,7 +2,7 @@ package rekssoft.task.notebook.interfaces;
 
 import java.util.List;
 import javax.persistence.PersistenceException;
-import rekssoft.task.notebook.User;
+import rekssoft.task.notebook.impl.User;
 
 /**
  * Interface <tt>UserDAO</tt> presents an operation set that is used by clients
@@ -14,8 +14,8 @@ import rekssoft.task.notebook.User;
  * To summarize, the <tt>UserDAO</tt> presents a contract of the business layout
  * of the application.
  *
- * @see User
- * @see UserDAOImpl
+ * @see rekssoft.task.notebook.impl.User
+ * @see rekssoft.task.notebook.impl.UserDAOImpl
  * @author ilya
  */
 public interface UserDAO extends Closable {

@@ -1,13 +1,12 @@
-package rekssoft.task.notebook;
+package rekssoft.task.notebook.interfaces;
 
 import java.util.List;
 import javax.persistence.RollbackException;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import rekssoft.task.notebook.interfaces.UserDAO;
+import rekssoft.task.notebook.impl.User;
 /**
  *
  * @author ilya

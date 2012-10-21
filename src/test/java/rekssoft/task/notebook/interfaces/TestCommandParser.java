@@ -1,10 +1,10 @@
-package rekssoft.task.notebook;
+package rekssoft.task.notebook.interfaces;
 
-import rekssoft.task.notebook.interfaces.CommandParser;
 import java.util.regex.Pattern;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
+import rekssoft.task.notebook.impl.User;
 import static rekssoft.task.notebook.interfaces.CommandParser.MAIL_PATTERN;
 import static rekssoft.task.notebook.interfaces.CommandParser.NAME_PATTERN;
 import static rekssoft.task.notebook.interfaces.CommandParser.PHONE_NUMBER_PATTERN;
@@ -110,14 +110,14 @@ public class TestCommandParser {
                 + "ivan.ivanov@gmail.com 8(960)0000000");
         
         User insertUser = commandParser.parseInsertCommand();
-        assertEquals("Incorrect count of arguments", (null != insertUser),
+        assertEquals("Incorrect the insert command", (null != insertUser),
                      true);
 
         commandParser.setCommand("--insert ivan Ivanov "
                 + "__iv++an...iv--anov@g__m++a--i?l.c 8(960)8800088");
         
         insertUser = commandParser.parseInsertCommand();
-        assertEquals("Incorrect count of arguments", (null == insertUser),
+        assertEquals("Incorrect the insert command", (null == insertUser),
                      true);
         
     }
@@ -126,14 +126,22 @@ public class TestCommandParser {
     public void testRemoveCommand() {
         commandParser.setCommand("--remove ivan.ivanov@gmail.com");
         String removingContact = commandParser.parseRemoveCommand();
-        assertEquals("Incorrect count of arguments", (null != removingContact),
+        assertEquals("Incorrect the remove command", (null != removingContact),
                      true);
 
         commandParser.setCommand("--remove i--v++an..i--vanov@--gmail.c");
         removingContact = commandParser.parseRemoveCommand();
-        assertEquals("Incorrect count of arguments", (null == removingContact),
+        assertEquals("Incorrect the remove command", (null == removingContact),
                      true);
         
+    }
+    
+    @Test 
+    public void testFindByNameCommand(){
+        commandParser.setCommand("--find Olya");
+        String findName = commandParser.parseFindByNameCommand();
+        assertEquals("Incorrect find by name command", (null != findName),
+                     true);
     }
     
     private CommandParser commandParser;
