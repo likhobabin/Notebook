@@ -61,11 +61,12 @@ public class AppImpl implements App {
         System.out.println("--help\n"
                 + "--insert <full-name> <e-mail> <phone-number>\n"
                 + "--print [Show an users table]\n"
+                + "--find <first-name>"
                 + "--remove <e-mail> [Remove an user by e-mail]\n"
                 + "--quit [Quit the program]\n"
                 + "[ Remark:"
                 + "\nRegular expressions:"
-                + "\n<full-name> : /^[A-Z]([A-Za-z]){1,20} ^[A-Z]([A-Za-z]){1,20}/"
+                + "\n<full-name> : <firstname> <surname> (/^[A-Z]([A-Za-z]){1,20} ^[A-Z]([A-Za-z]){1,20}/)"
                 + "\n\t iVan eGorov "
                 + "\n\t Alkjhhkhkhkhkhkhkhkjhk kjhkhhkhkhkhkhkhkj (not more than 21 chars) "
                 + "are INCORRECT"
@@ -105,44 +106,67 @@ public class AppImpl implements App {
      * Presents a simple user table.
      */
     public void printDialog() {
-        List<User> allUsers = getUserDAO().findAll();      
-        if (0 != allUsers.size()) {
-            final String[] tableHead = {
-                "Firstname",
-                "Surname",
-                "E-mail",
-                "Phone-number"
-            };
-            final int addnlAsteriskCount = 13;
-            final int maxFirstnameLength =
-                    getMaxFirstnameLength(allUsers, tableHead[0].length());
+        List<User> allUsers = null;
+        try {
+            if (null == (allUsers = getUserDAO().findAll())) {
+                System.err.println("Info: App.findAll"
+                        + " Could not find users");
+                
+            } else {
+                if (0 != allUsers.size()) {
+                    final String[] tableHead = {
+                        "Firstname",
+                        "Surname",
+                        "E-mail",
+                        "Phone-number"
+                    };
+                    final int addnlAsteriskCount = 13;
+                    final int maxFirstnameLength =
+                            getMaxFirstnameLength(allUsers, tableHead[0].length());
 
-            final int maxSurnameLength =
-                    getMaxSurnameLength(allUsers, tableHead[1].length());
+                    final int maxSurnameLength =
+                            getMaxSurnameLength(allUsers, tableHead[1].length());
 
-            final int maxMailLengh =
-                    getMaxMailLengh(allUsers, tableHead[2].length());
+                    final int maxMailLengh =
+                            getMaxMailLengh(allUsers, tableHead[2].length());
 
-            final int maxPhonenumberLengh =
-                    getMaxPhonenumberLengh(allUsers, tableHead[3].length());
+                    final int maxPhonenumberLengh =
+                            getMaxPhonenumberLengh(allUsers, tableHead[3].length());
 
-            final int asteriskCount = maxFirstnameLength + maxSurnameLength
-                    + maxMailLengh + maxPhonenumberLengh + addnlAsteriskCount;
-            
-            printTableHead(tableHead, maxFirstnameLength, maxSurnameLength,
-                           maxMailLengh, maxPhonenumberLengh, addnlAsteriskCount);
-            for (User currUser : allUsers) {
-                printUserRow(currUser, maxFirstnameLength, maxSurnameLength,
-                             maxMailLengh, maxPhonenumberLengh);
+                    final int asteriskCount = maxFirstnameLength + maxSurnameLength
+                            + maxMailLengh + maxPhonenumberLengh + addnlAsteriskCount;
+
+                    printTableHead(tableHead, maxFirstnameLength, maxSurnameLength,
+                                   maxMailLengh, maxPhonenumberLengh, addnlAsteriskCount);
+                    for (User currUser : allUsers) {
+                        printUserRow(currUser, maxFirstnameLength, maxSurnameLength,
+                                     maxMailLengh, maxPhonenumberLengh);
+                    }
+
+                    for (int i = 0; asteriskCount > i; i++) {
+                        System.out.print("*");
+                    }
+                    System.out.println();
+                } else {
+                    System.out.println("Info: The Users Database is empty");
+                }
             }
-            
-            for (int i = 0; asteriskCount > i; i++) {
-                System.out.print("*");
-            }
-            System.out.println();
         }
-        else {
-            System.out.println("Info: The Users Database is empty");
+        catch (PersistenceException ex) {
+            ex.printStackTrace();
+            System.err.println("Info: App.findAll"
+                    + " Could not find users,"
+                    + " database error");
+
+            getCommandParcer().setCommand(QUIT_COMMAND);
+        }
+        catch (RuntimeException ex) {
+            ex.printStackTrace();
+            System.err.println("Info: App.findAll"
+                    + " Could not find users,"
+                    + "runtime error");
+
+            getCommandParcer().setCommand(QUIT_COMMAND);
         }
     }
     
@@ -290,6 +314,81 @@ public class AppImpl implements App {
         }
         return maxLength;
     }
+    
+    /**
+     * Presents an user table that is a result of an user name search.
+     */
+    public void findByNameDialog() {
+        String findName = getCommandParcer().parseFindByNameCommand();
+        if(null == findName){
+            System.err.println("Info: App.findByNameDialog"
+                    + " Could not parse the input command");
+            
+        }
+        List<User> findByNameUsers = null;
+        try {
+            if (null == (findByNameUsers = getUserDAO().findByName(findName))) {
+                System.err.println("Info: App.findAll"
+                        + " Could not find users");
+
+            } else {
+                if (0 != findByNameUsers.size()) {
+                    final String[] tableHead = {
+                        "Firstname",
+                        "Surname",
+                        "E-mail",
+                        "Phone-number"
+                    };
+                    final int addnlAsteriskCount = 13;
+                    final int maxFirstnameLength =
+                            getMaxFirstnameLength(findByNameUsers, tableHead[0].length());
+
+                    final int maxSurnameLength =
+                            getMaxSurnameLength(findByNameUsers, tableHead[1].length());
+
+                    final int maxMailLengh =
+                            getMaxMailLengh(findByNameUsers, tableHead[2].length());
+
+                    final int maxPhonenumberLengh =
+                            getMaxPhonenumberLengh(findByNameUsers, tableHead[3].length());
+
+                    final int asteriskCount = maxFirstnameLength + maxSurnameLength
+                            + maxMailLengh + maxPhonenumberLengh + addnlAsteriskCount;
+
+                    printTableHead(tableHead, maxFirstnameLength, maxSurnameLength,
+                                   maxMailLengh, maxPhonenumberLengh, addnlAsteriskCount);
+                    for (User currUser : findByNameUsers) {
+                        printUserRow(currUser, maxFirstnameLength, maxSurnameLength,
+                                     maxMailLengh, maxPhonenumberLengh);
+                    }
+
+                    for (int i = 0; asteriskCount > i; i++) {
+                        System.out.print("*");
+                    }
+                    System.out.println();
+                } else {
+                    System.out.println("Info: The Users Database is empty");
+                }
+            }
+        }
+        catch (PersistenceException ex) {
+            ex.printStackTrace();
+            System.err.println("Info: App.findByNameDialog"
+                    + " Could not find users,"
+                    + " database error");
+
+            getCommandParcer().setCommand(QUIT_COMMAND);
+        }
+        catch (RuntimeException ex) {
+            ex.printStackTrace();
+            System.err.println("Info: App.findByNameDialog"
+                    + " Could not find users,"
+                    + "runtime error");
+
+            getCommandParcer().setCommand(QUIT_COMMAND);
+        }
+    }
+    
     /**
      * Receives the insert type commands and processes them with use of an 
      * {@link UserDAO} instance. So it inserts an {@link User} object if the object 
@@ -300,7 +399,7 @@ public class AppImpl implements App {
      * @see User
      */
     public void insertDialog() {
-        User insertUser = getCommandParcer().parseInserting();
+        User insertUser = getCommandParcer().parseInsertCommand();
         if(null == insertUser){
             System.err.println("Info: App.insertDialog"
                     + " Could not parse the input command");
@@ -342,7 +441,7 @@ public class AppImpl implements App {
      * @see User
      */
     public void removeDialog() {
-        String rmMail = getCommandParcer().parseRemoving();
+        String rmMail = getCommandParcer().parseRemoveCommand();
         if (null == rmMail) {
             System.err.println("Info: App.removeDialog"
                     + " Could not parse the input command");
@@ -392,6 +491,8 @@ public class AppImpl implements App {
             printDialog();
         } else if (getCommandParcer().isRemoved()) {
             removeDialog();
+        }  else if (getCommandParcer().isFoundByName()){
+            
         } else if (getCommandParcer().isQuit()) {
             System.out.println("Good bye!!!");
         } else {

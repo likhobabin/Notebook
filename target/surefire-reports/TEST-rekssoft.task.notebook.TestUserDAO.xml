@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="3.475" errors="0" skipped="0" tests="10" name="rekssoft.task.notebook.TestUserDAO">
+<testsuite failures="0" time="4.098" errors="0" skipped="0" tests="12" name="rekssoft.task.notebook.TestUserDAO">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386"/>
@@ -58,14 +58,16 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="1.567" classname="rekssoft.task.notebook.TestUserDAO" name="testInitializtion"/>
-  <testcase time="0.31" classname="rekssoft.task.notebook.TestUserDAO" name="testInsertion"/>
-  <testcase time="0.167" classname="rekssoft.task.notebook.TestUserDAO" name="testUniqueMail"/>
-  <testcase time="0.233" classname="rekssoft.task.notebook.TestUserDAO" name="testUniquePhonenumber"/>
-  <testcase time="0.147" classname="rekssoft.task.notebook.TestUserDAO" name="testInsertOfUnsettingUser"/>
-  <testcase time="0.24" classname="rekssoft.task.notebook.TestUserDAO" name="testFindAllQuery"/>
-  <testcase time="0.287" classname="rekssoft.task.notebook.TestUserDAO" name="testRemoveByMail"/>
-  <testcase time="0.156" classname="rekssoft.task.notebook.TestUserDAO" name="testRemoveByMailFromEmptyDataBase"/>
-  <testcase time="0.212" classname="rekssoft.task.notebook.TestUserDAO" name="testRemoveByPhoneNumber"/>
-  <testcase time="0.142" classname="rekssoft.task.notebook.TestUserDAO" name="testRemoveByPhoneNumberFromEmptyDataBase"/>
+  <testcase time="1.521" classname="rekssoft.task.notebook.TestUserDAO" name="testInitializtion"/>
+  <testcase time="0.303" classname="rekssoft.task.notebook.TestUserDAO" name="testInsertion"/>
+  <testcase time="0.186" classname="rekssoft.task.notebook.TestUserDAO" name="testUniqueMail"/>
+  <testcase time="0.183" classname="rekssoft.task.notebook.TestUserDAO" name="testUniquePhonenumber"/>
+  <testcase time="0.167" classname="rekssoft.task.notebook.TestUserDAO" name="testInsertOfUnsettingUser"/>
+  <testcase time="0.26" classname="rekssoft.task.notebook.TestUserDAO" name="testFindAllQuery"/>
+  <testcase time="0.255" classname="rekssoft.task.notebook.TestUserDAO" name="testFindByNameQuery"/>
+  <testcase time="0.391" classname="rekssoft.task.notebook.TestUserDAO" name="testFindRepeatingName"/>
+  <testcase time="0.241" classname="rekssoft.task.notebook.TestUserDAO" name="testRemoveByMail"/>
+  <testcase time="0.114" classname="rekssoft.task.notebook.TestUserDAO" name="testRemoveByMailFromEmptyDataBase"/>
+  <testcase time="0.307" classname="rekssoft.task.notebook.TestUserDAO" name="testRemoveByPhoneNumber"/>
+  <testcase time="0.156" classname="rekssoft.task.notebook.TestUserDAO" name="testRemoveByPhoneNumberFromEmptyDataBase"/>
 </testsuite>

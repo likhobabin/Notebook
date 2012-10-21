@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: rekssoft.task.notebook.TestUserDAO
 -------------------------------------------------------------------------------
-Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.475 sec
+Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.099 sec

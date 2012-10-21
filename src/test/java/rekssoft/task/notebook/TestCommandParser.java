@@ -109,14 +109,14 @@ public class TestCommandParser {
         commandParser.setCommand("--insert    Ivan Ivanov "
                 + "ivan.ivanov@gmail.com 8(960)0000000");
         
-        User insertUser = commandParser.parseInserting();
+        User insertUser = commandParser.parseInsertCommand();
         assertEquals("Incorrect count of arguments", (null != insertUser),
                      true);
 
         commandParser.setCommand("--insert ivan Ivanov "
                 + "__iv++an...iv--anov@g__m++a--i?l.c 8(960)8800088");
         
-        insertUser = commandParser.parseInserting();
+        insertUser = commandParser.parseInsertCommand();
         assertEquals("Incorrect count of arguments", (null == insertUser),
                      true);
         
@@ -125,12 +125,12 @@ public class TestCommandParser {
     @Test
     public void testRemoveCommand() {
         commandParser.setCommand("--remove ivan.ivanov@gmail.com");
-        String removingContact = commandParser.parseRemoving();
+        String removingContact = commandParser.parseRemoveCommand();
         assertEquals("Incorrect count of arguments", (null != removingContact),
                      true);
 
         commandParser.setCommand("--remove i--v++an..i--vanov@--gmail.c");
-        removingContact = commandParser.parseRemoving();
+        removingContact = commandParser.parseRemoveCommand();
         assertEquals("Incorrect count of arguments", (null == removingContact),
                      true);
         

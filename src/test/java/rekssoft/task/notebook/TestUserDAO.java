@@ -5,6 +5,7 @@ import javax.persistence.RollbackException;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import rekssoft.task.notebook.interfaces.UserDAO;
 /**
@@ -151,6 +152,28 @@ public class TestUserDAO {
         removeBulkOfUsersByMail();        
     }
     
+    @Test 
+    public void testFindByNameQuery(){
+        createBulkOfUsers();
+        String findName = "Olya";
+        List<User> allUsers = null;
+        allUsers = userDAO.findByName(findName);
+        assertEquals("Failed search of all users",
+                     (null != allUsers), true); 
+        removeBulkOfUsersByMail();   
+    }
+    
+    @Test 
+    public void testFindRepeatingName(){
+        createBulkOfUsers();
+        String findName = "Olya";
+        List<User> allUsers = null;
+        allUsers = userDAO.findByName(findName);
+        assertEquals("Failed search of all users",
+                     (null != allUsers), true); 
+        removeBulkOfUsersByMail();   
+    }
+    
     @Test
     public void testRemoveByMail() {     
         final String rmMail = "venya.pupkin@gmail.com";
@@ -173,6 +196,9 @@ public class TestUserDAO {
         userDAO.removeByMail("vitya.pupkin@gmail.com");        
         userDAO.removeByMail("mitya.pupkin@gmail.com");
         userDAO.removeByMail("slava.pupkin@gmail.com");
+        userDAO.removeByMail("olya.golovanova@gmail.com"); 
+        userDAO.removeByMail("olya.balabanova@gmail.com"); 
+        userDAO.removeByMail("olya.smirnova@gmail.com"); 
     }
     
     @Test
@@ -186,7 +212,7 @@ public class TestUserDAO {
     
     @Test
     public void testRemoveByPhoneNumber() {     
-        final String rmPhoneNumbet = "8(877)6669990";
+        final String rmPhoneNumbet = "8(877)6469990";
         createBulkOfUsers();
         
         assertEquals("Failed removing an user by the mail",
@@ -205,6 +231,8 @@ public class TestUserDAO {
         userDAO.removeByMail("venya.pupkin@gmail.com");        
         userDAO.removeByMail("mitya.pupkin@gmail.com");
         userDAO.removeByMail("slava.pupkin@gmail.com");
+        userDAO.removeByMail("olya.balabanova@gmail.com"); 
+        userDAO.removeByMail("olya.smirnova@gmail.com"); 
     }
     
     @Test
@@ -216,8 +244,7 @@ public class TestUserDAO {
                 
     }
     
-    private void createBulkOfUsers(){
-        
+    private void createBulkOfUsers(){        
         User insertUser0 = new User();
         insertUser0.setFirstname("Venya");
         insertUser0.setSurname("Pupkin");
@@ -226,10 +253,10 @@ public class TestUserDAO {
         userDAO.insert(insertUser0);        
         
         User insertUser1 = new User();
-        insertUser1.setFirstname("Vitya");
-        insertUser1.setSurname("Pupkin");
-        insertUser1.setMail("vitya.pupkin@gmail.com");
-        insertUser1.setPhoneNumber("8(877)6669990");
+        insertUser1.setFirstname("Olya");
+        insertUser1.setSurname("Golovanova");
+        insertUser1.setMail("olya.golovanova@gmail.com");
+        insertUser1.setPhoneNumber("8(877)6469990");
         userDAO.insert(insertUser1);
         
         User insertUser2 = new User();
@@ -243,15 +270,31 @@ public class TestUserDAO {
         insertUser4.setFirstname("Slava");
         insertUser4.setSurname("Pupkin");
         insertUser4.setMail("slava.pupkin@gmail.com");
-        insertUser4.setPhoneNumber("8(888)6669990");
+        insertUser4.setPhoneNumber("8(888)6369990");
         userDAO.insert(insertUser4);
+        
+        User insertUser5 = new User();
+        insertUser5.setFirstname("Olya");
+        insertUser5.setSurname("Balabanova");
+        insertUser5.setMail("olya.balabanova@gmail.com");
+        insertUser5.setPhoneNumber("8(877)6169900");
+        userDAO.insert(insertUser5);
+        
+        User insertUser6 = new User();
+        insertUser6.setFirstname("Olya");
+        insertUser6.setSurname("Smirnova");
+        insertUser6.setMail("olya.smirnova@gmail.com");
+        insertUser6.setPhoneNumber("8(777)6269900");
+        userDAO.insert(insertUser6);        
     }
     
     private void removeBulkOfUsersByMail(){
         userDAO.removeByMail("venya.pupkin@gmail.com");        
-        userDAO.removeByMail("vitya.pupkin@gmail.com");        
+        userDAO.removeByMail("olya.golovanova@gmail.com");        
         userDAO.removeByMail("mitya.pupkin@gmail.com");
         userDAO.removeByMail("slava.pupkin@gmail.com");
+        userDAO.removeByMail("olya.balabanova@gmail.com"); 
+        userDAO.removeByMail("olya.smirnova@gmail.com"); 
     }
     
     private UserDAO userDAO = Creator.createUserDAO();

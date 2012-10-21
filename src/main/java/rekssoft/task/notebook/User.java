@@ -31,6 +31,8 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u "
     + "ORDER BY u.firstname ASC"),
+    @NamedQuery(name = "User.findByName", query = "SELECT u FROM User u "
+    + "WHERE u.firstname = :firstname"),
     @NamedQuery(name = "User.findByMail", query = "SELECT u FROM User u "
     + "WHERE u.mail = :mail"),
     @NamedQuery(name = "User.findByPhonenumber", query = "SELECT u FROM User u "
@@ -43,6 +45,7 @@ import javax.persistence.Table;
 public class User implements Serializable {
 
     public static final String FIND_ALL_QUERY = "User.findAll";
+    public static final String FIND_BY_NAME_QUERY = "User.findByName";
     public static final String FIND_BY_MAIL_QUERY = "User.findByMail";
     public static final String FIND_BY_PHONENUMBER_QUERY =
             "User.findByPhonenumber";

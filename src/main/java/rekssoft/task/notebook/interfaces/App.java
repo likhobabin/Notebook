@@ -34,6 +34,11 @@ public interface App extends Closable {
     public void printDialog();
     
     /**
+     * Presents an user table that is a result of an user name search.
+     */
+    public void findByNameDialog();
+    
+    /**
      * Provides dialog with an {@link UserDAO} object 
      * to insert new users.
      * @see UserDAO 

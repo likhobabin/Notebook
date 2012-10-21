@@ -40,35 +40,51 @@ public interface UserDAO extends Closable {
      *
      * @param anUser inserting user object
      * @return <tt>true</tt> if everything is right
-     * @throws PersistenceException if some database errors occur
+     * @throws PersistenceException, RuntimeException if some database errors
+     * occur
      */
-    public boolean insert(User anUser) throws PersistenceException;
+    public boolean insert(User anUser) throws RuntimeException,
+                                              PersistenceException;
 
     /**
      * Finds all {@link User} objects in the database.
      *
      * @return <tt>List<User></tt> list of users
-     * @throws PersistenceException if some database errors occur
+     * @throws PersistenceException, RuntimeException if some database errors
+     * occur
      */
-    public List<User> findAll() throws PersistenceException;
+    public List<User> findAll() throws RuntimeException,
+                                       PersistenceException;
+
+    /**
+     * Finds all {@link User} objects by a name in the database.
+     *
+     * @return <tt>List<User></tt> list of users with the same name
+     * @throws PersistenceException, RuntimeException if some database errors
+     * occur
+     */
+    public List<User> findByName(String aFirstName) throws RuntimeException,
+                                                           PersistenceException;
 
     /**
      * Removes an {@link User} object from the database by his e-mail.
      *
      * @param aMail e-mail value
      * @return <tt>true</tt> if everything is right
-     * @throws PersistenceException if some database errors occur
+     * @throws PersistenceException, RuntimeException if some database errors
+     * occur
      */
     public boolean removeByMail(String aMail)
-            throws PersistenceException;
+            throws RuntimeException, PersistenceException;
 
     /**
      * Removes an {@link User} object from the database by his phone number.
      *
      * @param aPhonenumber phone number value
      * @return <tt>true</tt> if everything is right
-     * @throws PersistenceException if some database errors occur
+     * @throws PersistenceException, RuntimeException if some database errors
+     * occur
      */
     public boolean removeByPhonenumber(String aPhonenumber)
-            throws PersistenceException;
+            throws RuntimeException, PersistenceException;
 }

@@ -160,6 +160,45 @@ public class UserDAOImpl implements UserDAO {
         return result;
     }
 
+    public List<User> findByName(String aFirstName)
+            throws IllegalArgumentException,
+                   PersistenceException {
+
+        List<User> result = null;
+        boolean isThrowing = false;
+        try {
+            if (!getResrcForkConnection().isOpen()) {
+                System.err.println("Debug UserDAO.findByFullName "
+                        + "the fork connection is closed");
+
+                return null;
+            }
+            result = (List<User>) getResrcForkConnection()
+                    .createNamedQuery(User.FIND_BY_NAME_QUERY)
+                    .setParameter("firstname", aFirstName)
+                    .getResultList();
+
+        }
+        catch (IllegalArgumentException ex) {
+            ex.printStackTrace();
+            isThrowing = true;
+            throw ex;
+        }
+        catch (PersistenceException ex) {
+            ex.printStackTrace();
+            isThrowing = true;
+            throw ex;
+        }
+        finally {
+            if (isThrowing) {
+                System.err.print("Debug UserDAOImpl.findByFullName is failed, "
+                        + "close the connection");
+                close();
+            }
+        }
+        return result;
+    }
+
     /**
      * Removes {@link User} object from the opened database with use of his
      * e-mail. Returns <tt>false</tt>, if the database connection is not opened,
