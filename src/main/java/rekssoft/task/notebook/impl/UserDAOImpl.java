@@ -74,7 +74,6 @@ public class UserDAOImpl implements UserDAO {
             getResrcForkConnection().getTransaction().commit();
         }
         catch (IllegalArgumentException ex) {
-            ex.printStackTrace();
             isThrowing = true;
             throw ex;
         }

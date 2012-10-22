@@ -56,6 +56,7 @@ public enum LoggerSingleton {
                 if (null != sysLogger && !openedState) {
                     sysLogger.setLevel(aLogLevel);
                     sysLogger.addHandler(createHandler(anIsFileAppend));
+                    openedState=true;
                 }
             }
             catch (IOException ex) {
@@ -84,6 +85,7 @@ public enum LoggerSingleton {
                     currHandler.flush();
                     currHandler.close();
                 }
+                openedState=false;
             }
         }
         private static final Logger sysLogger =

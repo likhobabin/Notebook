@@ -30,6 +30,11 @@ public class AppImpl implements App {
     public static void main(String[] args) throws Throwable {
         App app = null;
         try {
+            if (!logSingleton.openLogger(false, Level.ALL)) {
+                throw new IllegalStateException("Can't open "
+                        + "rekssoft.task.notebook.impl.SingletonLogger");
+
+            }
             /*
              * creates with Creator class
              */
@@ -40,9 +45,11 @@ public class AppImpl implements App {
             app.startDialog();
         }
         catch (Throwable ex) {
-            logSingleton.getSystemLogger().logp(Level.SEVERE, AppImpl.class.getName(),
-                                                "main",
-                                                ex.getMessage(), ex);
+            if (logSingleton.isLoggerOpened()) {
+                logSingleton.getSystemLogger().logp(Level.SEVERE, AppImpl.class.getName(),
+                                                    "main",
+                                                    ex.getMessage(), ex);
+            }
             throw ex;
         }
         /*
@@ -50,6 +57,7 @@ public class AppImpl implements App {
          */
         finally {
             app.close();
+            logSingleton.closeLogger();
         }
     }
     public static final LoggerSingleton logSingleton =
