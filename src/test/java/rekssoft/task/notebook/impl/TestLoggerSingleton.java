@@ -3,7 +3,6 @@ package rekssoft.task.notebook.impl;
 import java.util.logging.Level;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
