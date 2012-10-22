@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package rekssoft.task.notebook.impl;
 
 import java.io.FileOutputStream;
@@ -11,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 import java.util.logging.StreamHandler;
+import rekssoft.task.notebook.interfaces.Closable;
 
 /**
  *
@@ -22,7 +19,7 @@ public enum LoggerSingleton {
     
     public static final String FILE_NAME = ".log";
 
-    protected static class TxtLogger {
+    protected static class TxtLogger implements Closable {
 
         public TxtLogger() {
         }
