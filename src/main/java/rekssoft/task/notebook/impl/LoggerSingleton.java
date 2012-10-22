@@ -48,7 +48,7 @@ public enum LoggerSingleton {
         }
 
         public Logger defaultOpen() {
-            return open(false, Level.INFO);
+            return open(false, Level.WARNING);
         }
 
         public Logger open(boolean anIsFileAppend, Level aLogLevel) {

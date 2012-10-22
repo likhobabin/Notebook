@@ -30,7 +30,7 @@ public class AppImpl implements App {
     public static void main(String[] args) throws Throwable {
         App app = null;
         try {
-            if (!logSingleton.openLogger(false, Level.ALL)) {
+            if (!logSingleton.openLogger()) {
                 throw new IllegalStateException("Can't open "
                         + "rekssoft.task.notebook.impl.SingletonLogger");
 
