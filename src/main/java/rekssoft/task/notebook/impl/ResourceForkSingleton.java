@@ -26,11 +26,11 @@ import rekssoft.task.notebook.interfaces.ResourceFork;
  * @see ResourceFork
  * @author ilya
  */
-public enum SingleResourceFork implements ResourceFork {
+public enum ResourceForkSingleton implements ResourceFork {
 
     RESRC_FORK;
 
-    SingleResourceFork() {
+    ResourceForkSingleton() {
     }
 
     /**
@@ -39,7 +39,7 @@ public enum SingleResourceFork implements ResourceFork {
      *
      * @param aPersistenceUnitName a passing persistence unit
      */
-    SingleResourceFork(String aPersistenceUnitName) {
+    ResourceForkSingleton(String aPersistenceUnitName) {
         persistenceUnitName = aPersistenceUnitName;
     }
 

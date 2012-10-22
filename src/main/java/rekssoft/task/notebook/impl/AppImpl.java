@@ -2,6 +2,7 @@ package rekssoft.task.notebook.impl;
 
 import java.io.Console;
 import java.util.List;
+import java.util.logging.Level;
 import javax.persistence.PersistenceException;
 import rekssoft.task.notebook.interfaces.App;
 import rekssoft.task.notebook.interfaces.CommandParser;
@@ -26,7 +27,7 @@ public class AppImpl implements App {
      *
      * @param args
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Throwable {
         App app = null;
         try {
             /*
@@ -38,6 +39,12 @@ public class AppImpl implements App {
              */
             app.startDialog();
         }
+        catch (Throwable ex) {
+            logSingleton.getSystemLogger().logp(Level.SEVERE, AppImpl.class.getName(),
+                                                "main",
+                                                ex.getMessage(), ex);
+            throw ex;
+        }
         /*
          * to be sure the App instance is closed
          */
@@ -45,6 +52,8 @@ public class AppImpl implements App {
             app.close();
         }
     }
+    public static final LoggerSingleton logSingleton =
+            LoggerSingleton.OPENING_LOGGER;
 
     public void startDialog() {
         /*
@@ -157,7 +166,9 @@ public class AppImpl implements App {
             }
         }
         catch (PersistenceException ex) {
-            ex.printStackTrace();
+            logSingleton.getSystemLogger().logp(Level.SEVERE, getClass().getName(),
+                                                "printDialog",
+                                                ex.getMessage(), ex);
             System.err.println("Info: App.findAll"
                     + " Could not find users,"
                     + " database error");
@@ -165,7 +176,9 @@ public class AppImpl implements App {
             getCommandParcer().setCommand(QUIT_COMMAND);
         }
         catch (RuntimeException ex) {
-            ex.printStackTrace();
+            logSingleton.getSystemLogger().logp(Level.SEVERE, getClass().getName(),
+                                                "printDialog",
+                                                ex.getMessage(), ex);
             System.err.println("Info: App.findAll"
                     + " Could not find users,"
                     + "runtime error");
@@ -385,7 +398,9 @@ public class AppImpl implements App {
                 }
             }
             catch (PersistenceException ex) {
-                ex.printStackTrace();
+                logSingleton.getSystemLogger().logp(Level.SEVERE, getClass().getName(),
+                                                    "findByNameDialog",
+                                                    ex.getMessage(), ex);
                 System.err.println("Info: App.findByNameDialog"
                         + " Could not find users,"
                         + " database error");
@@ -393,7 +408,9 @@ public class AppImpl implements App {
                 getCommandParcer().setCommand(QUIT_COMMAND);
             }
             catch (RuntimeException ex) {
-                ex.printStackTrace();
+                logSingleton.getSystemLogger().logp(Level.SEVERE, getClass().getName(),
+                                                    "findByNameDialog",
+                                                    ex.getMessage(), ex);
                 System.err.println("Info: App.findByNameDialog"
                         + " Could not find users,"
                         + "runtime error");
@@ -427,7 +444,9 @@ public class AppImpl implements App {
                 }
             }
             catch (PersistenceException ex) {
-                ex.printStackTrace();
+                logSingleton.getSystemLogger().logp(Level.SEVERE, getClass().getName(),
+                                                    "insertDialog",
+                                                    ex.getMessage(), ex);
                 System.err.println("Info: App.insertDialog"
                         + " Could not insert the input user,"
                         + " database error");
@@ -435,7 +454,9 @@ public class AppImpl implements App {
                 getCommandParcer().setCommand(QUIT_COMMAND);
             }
             catch (RuntimeException ex) {
-                ex.printStackTrace();
+                logSingleton.getSystemLogger().logp(Level.SEVERE, getClass().getName(),
+                                                    "insertDialog",
+                                                    ex.getMessage(), ex);
                 System.err.println("Info: App.insertDialog"
                         + " Could not insert the input user,"
                         + "runtime error");
@@ -467,7 +488,10 @@ public class AppImpl implements App {
                 }
             }
             catch (PersistenceException ex) {
-                ex.printStackTrace();
+                logSingleton.getSystemLogger().logp(Level.SEVERE, getClass().getName(),
+                                                    "removeDialog",
+                                                    ex.getMessage(), ex);
+
                 System.err.println("Info: App.removeDialog"
                         + " Could not remove an user by the mail,"
                         + " database error");
@@ -475,7 +499,10 @@ public class AppImpl implements App {
                 getCommandParcer().setCommand(QUIT_COMMAND);
             }
             catch (RuntimeException ex) {
-                ex.printStackTrace();
+                logSingleton.getSystemLogger().logp(Level.SEVERE, getClass().getName(),
+                                                    "removeDialog",
+                                                    ex.getMessage(), ex);
+
                 System.err.println("Info: App.insertDialog"
                         + " Could not remove an user by the mail,"
                         + " runtime error");

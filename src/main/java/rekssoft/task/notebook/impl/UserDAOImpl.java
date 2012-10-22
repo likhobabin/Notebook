@@ -22,7 +22,7 @@ import rekssoft.task.notebook.interfaces.UserDAO;
 public class UserDAOImpl implements UserDAO {
 
     public UserDAOImpl() {
-        userResrcFork = SingleResourceFork.RESRC_FORK;
+        userResrcFork = ResourceForkSingleton.RESRC_FORK;
     }
 
     /**
@@ -79,7 +79,6 @@ public class UserDAOImpl implements UserDAO {
             throw ex;
         }
         catch (IllegalStateException ex) {
-            ex.printStackTrace();
             isThrowing = true;
             throw ex;
         }
@@ -91,7 +90,6 @@ public class UserDAOImpl implements UserDAO {
             return false;
         }
         catch (PersistenceException ex) {
-            ex.printStackTrace();
             isThrowing = true;
             throw ex;
         }
@@ -141,12 +139,10 @@ public class UserDAOImpl implements UserDAO {
 
         }
         catch (IllegalArgumentException ex) {
-            ex.printStackTrace();
             isThrowing = true;
             throw ex;
         }
         catch (PersistenceException ex) {
-            ex.printStackTrace();
             isThrowing = true;
             throw ex;
         }
@@ -180,12 +176,10 @@ public class UserDAOImpl implements UserDAO {
 
         }
         catch (IllegalArgumentException ex) {
-            ex.printStackTrace();
             isThrowing = true;
             throw ex;
         }
         catch (PersistenceException ex) {
-            ex.printStackTrace();
             isThrowing = true;
             throw ex;
         }
@@ -237,7 +231,6 @@ public class UserDAOImpl implements UserDAO {
             getResrcForkConnection().getTransaction().commit();
         }
         catch (IllegalArgumentException ex) {
-            ex.printStackTrace();
             isThrowing = true;
             throw ex;
         }
@@ -247,7 +240,6 @@ public class UserDAOImpl implements UserDAO {
             return false;
         }
         catch (PersistenceException ex) {
-            ex.printStackTrace();
             isThrowing = true;
             throw ex;
         }
@@ -299,7 +291,6 @@ public class UserDAOImpl implements UserDAO {
             getResrcForkConnection().getTransaction().commit();
         }
         catch (IllegalArgumentException ex) {
-            ex.printStackTrace();
             isThrowing = true;
             throw ex;
         }
@@ -309,7 +300,6 @@ public class UserDAOImpl implements UserDAO {
             return false;
         }
         catch (PersistenceException ex) {
-            ex.printStackTrace();
             isThrowing = true;
             throw ex;
         }
