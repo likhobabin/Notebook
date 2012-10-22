@@ -1,6 +1,7 @@
 package rekssoft.task.notebook.impl;
 
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -65,5 +66,31 @@ public class TestLoggerSingleton {
             }
         }
     }
+    
+    @Test 
+    public void testSeveralLoggers() {
+        TxtLogger secondLogger = new TxtLogger(".log");
+        final Logger secondSystemLogger = secondLogger.defaultOpen();
+        if (null != secondSystemLogger) {
+            try {
+                throw new RuntimeException("Test: TestTxtLogger.testMsgLogging");
+            }
+            catch (RuntimeException ex) {
+                if (logSingleton.isLoggerOpened()) {
+                    logSingleton.getSystemLogger().logp(Level.SEVERE, getClass().getName(),
+                                                        "SEVERE Logging 1",
+                                                        ex.getMessage(), ex);
+                }
+
+                secondSystemLogger.logp(Level.SEVERE, getClass().getName(),
+                                        "SEVERE Logging 2",
+                                        ex.getMessage(), ex);
+            }
+            finally {
+                secondLogger.close();
+            }
+        }
+    }
+    
     private final static LoggerSingleton logSingleton = LoggerSingleton.OPENING_LOGGER;
 }

@@ -52,7 +52,8 @@ public class TxtLogger implements Closable {
 
     public Logger open(boolean anIsFileAppend, Level aLogLevel) {
         try {
-            if (null != sysLogger && !openedState) {
+//            if (null != sysLogger && !openedState) {
+            if (!openedState) {
                 sysLogger.setLevel(aLogLevel);
                 sysLogger.addHandler(createHandler(anIsFileAppend));
                 openedState = true;
